@@ -1,6 +1,10 @@
 class Idea {
-  constructor() {
-
+  constructor(id, title, body, star, quality) {
+    this.id = id;
+    this.title = title;
+    this.body = body;
+    this.star = star;
+    this.quality = quality;
   }
   saveToStorage() {
 
@@ -12,6 +16,6 @@ class Idea {
 
   }
   updateQuality() {
-    
+
   }
 }
