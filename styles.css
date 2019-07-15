@@ -5,7 +5,30 @@
   border: 1px solid red;
 }
 
+body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 40% 1fr;
+  grid-template-areas: 
+  'nav section section section'
+  'nav main main main'
+}
+
 img {
   height: 50px;
   width: 50px;
+}
+
+nav {
+  height: 100%;
+  background-color: #1F1F3D;
+  grid-area: nav;
+}
+
+section {
+  grid-area: section;
+}
+
+main {
+  grid-area: main;
 }
