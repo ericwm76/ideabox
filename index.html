@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Idea Box Redux
+    </title>
+  </head>
+  <body>
+    <nav class="nav">
+      <h1 class="nav__header">Idea Box Redux</h1>
+      <h6 class="nav__label">Filter Starred Ideas</h6>
+      <button class="nav__button">Show Starred Ideas</button>
+      <h6 class="nav__label">Filter by Quality</h6>
+      <button class="nav__button swill-quality">Swill</button>
+      <button class="nav__button swill-quality">Plausible</button>
+      <button class="nav__button swill-quality">Genius</button>
+      <form class="nav__form">
+        <label class="nav__input">New Quality</label>
+        <button class="nav__button" id="quality-btn">Add New Quality</button>
+      </form>
+    </nav>
+    <section class="section">
+      <form class="section__form">
+        <label class="section__label" for="title-input">Title</label>
+        <input class="section__input" id="title-input">
+        <label class="section__label" for="idea-body">Body</label>
+        <textarea class="section__text" id="idea-body"></textarea>
+        <button class="section__button" id="save-btn">Save</button>
+        <img src="images/search.svg" id="mag-image" alt="picture of a maginifying glass">
+        <input class="section__input">
+      </form>
+    </section>
+    <main>
+      <article class="article">
+        <header class="article__header">
+          <img src="images/star.svg" id="star-img" alt="picture of a star white">
+          <img src="images/star-active.svg" id="star-img" alt="picture of a star red">
+          <img src="imgages/delete.svg" id="delete-x" alt="white x">
+          <img src="imgages/delete-active.svg" id="delete-x" alt="red x">
+        </header>
+        <p class="article__title">Idea Title</p>
+        <p class="article__body">Lorem Ipsum</p>
+        <footer class="article__footer">
+          <img src="images/upvote.svg" id="up-arrow" alt="arrow pointing up white">
+          <img src="images/upvote-active.svg" id="up-arrow" alt="arrow pointing up black">
+          <p class="article__quality"><span id="idea-quality">Quality</span></p>
+          <img src="images/downvote.svg" id="down-arrow" alt="arrow pointing down white">
+          <img src="images/downvote-active.svg" id="down-arrow" alt="arrow pointing down black">
+        </footer>
+      </article>
+    </main>
+  </body>
+</html>
