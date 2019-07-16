@@ -100,16 +100,14 @@ function navEventHandler (e) {
 }
 
 
-document.querySelector('main').addEventListener('click', deleteIdea)
+document.querySelector('main').addEventListener('click', findIdeaToRemove)
 
-function deleteIdea(e) {
+function findIdeaToRemove(e) {
   if (e.target.closest('#delete-x')) {
     e.target.closest('article').remove();
     var identifier = e.target.closest('article').dataset.identifier;
     var index = ideasArray.findIndex(id => {return parseInt(identifier) === id.id});
-    console.log(ideasArray.splice(index, 1));
-
-    // saveToStorage(ideasArray);
+    ideasArray[index].deleteFromStorage(identifier);
   }
 }
 
