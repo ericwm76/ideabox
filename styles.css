@@ -30,6 +30,66 @@ nav {
   flex-direction: column;
 }
 
+nav h1 {
+  font-size: 1.25em;
+  font-weight: 700;
+  padding: 15px;
+  margin: 0;
+  border-bottom: 1px solid #5356A4;
+}
+
+nav h6 {
+  font-size: .8em;
+  padding: 15px;
+  font-weight: 400;
+  margin: 0;
+}
+
+/*
+show starred ideas button{
+  background-color: #5356A4;
+  color: #E9E9F3;
+  border: 1px solid #353567;
+  padding: 10px;
+  margin: 0 15px;
+}*/
+
+
+
+/* middle 3 buttons */
+nav button {
+  background-color: #1F1F3D;
+  border-bottom: none;
+  border-left: 7px solid #1F1F3D;
+  border-right: none;
+  border-top: none;
+  color: #FFFFFF; 
+  margin: 0px;
+  padding: 10px 0px 10px 8px;
+  text-align: left;
+}
+
+nav button:hover {
+  background-color: #D12119;
+  border-bottom: none;
+  border-left: 7px solid #F58E72;
+  border-right: none;
+  border-top: none;
+  color: #FFFFFF; 
+  margin: 0px;
+  padding: 10px 0px 10px 8px;
+  text-align: left;
+}
+
+nav form {
+  padding:0px 15px;
+}
+nav form label {
+  display: block;
+}
+nav form input {
+  
+}
 section {
   grid-area: section;
   background-color: #A9AAD2;
