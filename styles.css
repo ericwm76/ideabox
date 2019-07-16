@@ -47,19 +47,21 @@ nav h6 {
   margin: 0;
 }
 
-/*
-show starred ideas and new quality buttons {
+.filter-header {
+    border-top: 1px solid #353567;
+}
+
+nav button{
+  
   background-color: #5356A4;
   color: #E9E9F3;
-  border: 1px solid #353567;
-  padding: 10px;
-  margin: 0 15px;
-}*/
-
-
+  border: 1px solid #5356A4;
+  padding: 10px 0px 10px 0px;
+  margin: 0px 15px 15px 15px;
+}
 
 /* middle 3 buttons */
-nav button {
+.swill-quality {
   background-color: #1F1F3D;
   border-bottom: none;
   border-left: 7px solid #1F1F3D;
@@ -71,7 +73,7 @@ nav button {
   text-align: left;
 }
 /*not a hover this is the selected state */
-nav button:hover {
+.swill-quality:hover {
   background-color: #D12119;
   border-bottom: none;
   border-left: 7px solid #F58E72;
@@ -82,9 +84,13 @@ nav button:hover {
   padding: 10px 0px 10px 8px;
   text-align: left;
 }
-
+ #quality-btn {
+  margin-left: 0px;
+  width:100%;
+ }
 nav form {
   padding:0px 15px;
+  border-bottom: 1px solid #353567;
 }
 
 nav form label {
