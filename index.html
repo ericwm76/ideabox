@@ -13,12 +13,13 @@
       <h1 class="nav__header">Idea Box Redux</h1>
       <h6 class="nav__label">Filter Starred Ideas</h6>
       <button class="nav__button">Show Starred Ideas</button>
-      <h6 class="nav__label">Filter by Quality</h6>
+      <h6 class="nav__label filter-header">Filter by Quality</h6>
       <button class="nav__button swill-quality">Swill</button>
       <button class="nav__button swill-quality">Plausible</button>
       <button class="nav__button swill-quality">Genius</button>
       <form class="nav__form">
-        <label class="nav__input">New Quality</label>
+        <label class="nav__lable">New Quality</label>
+        <input class="nav__input" id="quality-input">
         <button class="nav__button" id="quality-btn">Add New Quality</button>
       </form>
     </nav>
@@ -31,7 +32,7 @@
         <button class="section__button" id="save-btn">Save</button>
         <div class="section__search">
           <img src="images/search.svg" id="mag-image" alt="picture of a maginifying glass">
-          <input class="section__input" id="search-input">
+          <input class="section__input" id="search-input"placeholder="Search ideas">
         </div>
       </form>
     </section>
@@ -39,7 +40,7 @@
       <article class="article">
         <header class="article__header">
           <img src="images/star.svg" id="star-img" alt="picture of a star white">
-<!--           <img src="images/star-active.svg" id="star-img" alt="picture of a star red"> -->
+          <!-- <img src="images/star-active.svg" id="star-img" alt="picture of a star red"> -->
           <img src="images/delete.svg" id="delete-x" alt="white x">
           <!-- <img src="images/delete-active.svg" id="delete-x" alt="red x"> -->
         </header>
