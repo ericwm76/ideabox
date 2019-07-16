@@ -36,10 +36,11 @@ nav h1 {
   font-weight: 700;
   padding: 15px;
   margin: 0;
-  border-bottom: 1px solid #5356A4;
+  border-bottom: 1px solid #353567;
 }
 
 nav h6 {
+  color: #5356A4;
   font-size: .8em;
   padding: 15px;
   font-weight: 400;
@@ -85,17 +86,20 @@ nav button:hover {
 nav form {
   padding:0px 15px;
 }
+
 nav form label {
   display: block;
   font-size: .8em;
-
+  color: #BFBFDD;
   font-weight: 400;
   margin: 15px 0px;
 }
 nav form input {
+  color: #5356A4;
   width: 100%;
   height:45px;
 }
+
 section {
   grid-area: section;
   background-color: #A9AAD2;
@@ -107,16 +111,26 @@ section form {
   flex-direction: column;
   height: 100%;
 }
+section form label{
+    font-weight: 700;
+    color: #1F1F3D;
+    font-size: 1em;
+    margin-bottom: 5px;
+}
 
 section form input {
+  color:#5356A4;
   margin-bottom: 15px;
   border: 1px solid #353567;
+  height: 15%;
 }
 
 section form textarea {
+  color:#5356A4;  
   margin-bottom: 15px;
   border: 1px solid #353567;
   resize: none;
+  height: 20%;
 }
 
 section form button {
@@ -124,6 +138,7 @@ section form button {
   background-color: #353567;
   border: #353567;
   margin-bottom: 15px;
+  padding: 10px;
 }
 
 section div {
@@ -132,9 +147,16 @@ section div {
 }
 
 section div input {
+  color:#5356A4;
   height: 100%;
   margin: 0;
   width: 100%;
+}
+
+::placeholder {
+  color:#5356A4;
+  font-size: .7em;
+  padding: 10px;
 }
 
 main {
