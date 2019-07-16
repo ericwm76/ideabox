@@ -61,3 +61,42 @@ function persisting() {
    //run through populator
    //run populator on page load.
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.querySelector('nav').addEventListener('click', navEventHandler);
+
+function navEventHandler (e) {
+  if (e.target.closest('.swill-quality')) {
+    e.target.closest('.swill-quality').classList.add('swill-quality-active');
+    e.target.closest('.swill-quality').classList.remove('swill-quality');
+  } else if (e.target.closest('.swill-quality-active')) {
+        e.target.closest('.swill-quality-active').classList.add('swill-quality');
+    e.target.closest('.swill-quality-active').classList.remove('swill-quality-active');
+  }
+}
+
+
