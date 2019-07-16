@@ -9,6 +9,8 @@ var saveBtn = document.querySelector('#save-btn');
 ideaInputs.addEventListener('keyup', disableSave);
 ideaInputs.addEventListener('click', runAll);
 
+persisting(ideaInputs);
+
 function runAll(e) {
   e.preventDefault();
   if (e.target.closest('#save-btn')) {
@@ -57,7 +59,7 @@ function createObj() {
 }
 
 function persisting() {
-   //get the array of ideas
-   //run through populator
-   //run populator on page load.
-}
+   ideasArray.forEach(function (element) {
+     displayIdea(element)
+   })
+ }
