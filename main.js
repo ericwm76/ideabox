@@ -11,9 +11,10 @@ ideaInputs.addEventListener('click', runAll);
 
 function runAll(e) {
   e.preventDefault();
-  displayIdea(e);
-  clearInputs(e);
-  createObj(e);
+  if (e.target.closest('#save-btn')) {
+  createObj();
+  clearInputs();
+  }
 }
 
 function disableSave() {
@@ -24,8 +25,7 @@ function disableSave() {
   }
 }
 
-function displayIdea(e) {
-  if (event.target.closest('#save-btn')) {
+function displayIdea() {
   ideaBoard.insertAdjacentHTML(
     "afterbegin",`<article class="article">
           <header class="article__header">
@@ -40,18 +40,24 @@ function displayIdea(e) {
             <img src="images/downvote.svg" id="down-arrow" alt="arrow pointing down white">
           </footer>
       </article>`
-  )};
+  );
 }
 
-function clearInputs(e) {
-  if (e.target.closest('#save-btn'))
+function clearInputs() {
   titleInput.value = '';
   bodyInput.value = '';
 }
 
-function createObj(e) {
-  if (e.target.matches('#save-btn')) {
+function createObj() {
   var newIdea = new Idea(titleInput.value, bodyInput.value, false, 0, Date.now());
   ideasArray.push(newIdea);
-  console.log(newIdea);
-}}
+  newIdea.saveToStorage();
+  console.log(ideasArray)
+  displayIdea();
+}
+
+function persisting() {
+   //get the array of ideas
+   //run through populator
+   //run populator on page load.
+}

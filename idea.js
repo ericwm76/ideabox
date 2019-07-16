@@ -6,8 +6,14 @@ class Idea {
     this.quality = 0;
     this.id = id || Date.now();
   }
-  saveToStorage() {}
+  
+  saveToStorage() {
+    localStorage.setItem('array', JSON.stringify(ideasArray));
+  }
+
   deleteFromStorage() {}
+
   updateIdea() {}
+
   updateQuality() {}
 }
