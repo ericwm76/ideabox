@@ -20,6 +20,7 @@ img {
   height: 25px;
   width: 25px;
 }
+button:focus {outline:0;}
 
 nav {
   height: 100%;
@@ -46,7 +47,7 @@ nav h6 {
 }
 
 /*
-show starred ideas button{
+show starred ideas and new quality buttons {
   background-color: #5356A4;
   color: #E9E9F3;
   border: 1px solid #353567;
@@ -68,7 +69,7 @@ nav button {
   padding: 10px 0px 10px 8px;
   text-align: left;
 }
-
+/*not a hover this is the selected state */
 nav button:hover {
   background-color: #D12119;
   border-bottom: none;
@@ -86,9 +87,14 @@ nav form {
 }
 nav form label {
   display: block;
+  font-size: .8em;
+
+  font-weight: 400;
+  margin: 15px 0px;
 }
 nav form input {
-  
+  width: 100%;
+  height:45px;
 }
 section {
   grid-area: section;
