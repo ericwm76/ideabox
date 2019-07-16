@@ -100,3 +100,12 @@ function navEventHandler (e) {
 }
 
 
+document.querySelector('main').addEventListener('click', deleteIdea)
+
+function deleteIdea(e) {
+  if (e.target.closest('#delete-x')) {
+    e.target.closest('article').remove();
+    // remove from localStorage
+  }
+}
+
