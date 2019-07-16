@@ -1,4 +1,4 @@
-var ideasArray = JSON.parse(localStorage.getItem([])) || [];
+var ideasArray = JSON.parse(localStorage.getItem('array')) || [];
 var navBar = document.querySelector('nav');
 var ideaInputs = document.querySelector('section');
 var ideaBoard = document.querySelector('main');
@@ -8,6 +8,8 @@ var saveBtn = document.querySelector('#save-btn');
 
 ideaInputs.addEventListener('keyup', disableSave);
 ideaInputs.addEventListener('click', runAll);
+
+persisting(ideaInputs);
 
 function runAll(e) {
   e.preventDefault();
@@ -27,7 +29,7 @@ function disableSave() {
 
 function displayIdea() {
   ideaBoard.insertAdjacentHTML(
-    "afterbegin",`<article class="article">
+    'afterbegin',`<article class="article">
           <header class="article__header">
             <img src="images/star.svg" id="star-img" alt="picture of a star white">
             <img src="images/delete.svg" id="delete-x" alt="white x">
@@ -51,13 +53,13 @@ function clearInputs() {
 function createObj() {
   var newIdea = new Idea(titleInput.value, bodyInput.value, false, 0, Date.now());
   ideasArray.push(newIdea);
-  newIdea.saveToStorage();
+  newIdea.saveToStorage(ideasArray);
   console.log(ideasArray)
   displayIdea();
 }
 
 function persisting() {
-   //get the array of ideas
-   //run through populator
-   //run populator on page load.
-}
+   ideasArray.forEach(function (element) {
+     displayIdea(element)
+   })
+ }
