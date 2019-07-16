@@ -2,12 +2,18 @@ class Idea {
   constructor(title, body, star, quality, id) {
     this.title = title;
     this.body = body;
-    this.star = star;
-    this.quality = quality;
+    this.star = false;
+    this.quality = 0;
     this.id = id || Date.now();
   }
-  saveToStorage() {}
+  
+  saveToStorage() {
+    localStorage.setItem('array', JSON.stringify(ideasArray));
+  }
+
   deleteFromStorage() {}
+
   updateIdea() {}
+
   updateQuality() {}
 }
