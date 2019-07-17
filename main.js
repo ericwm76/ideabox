@@ -1,4 +1,4 @@
-var ideasArray = JSON.parse(localStorage.getItem('array')).map(function(element){ return new Idea(element)}) || [];
+var ideasArray = JSON.parse(localStorage.getItem('array')).map(element => new Idea(element)) || [];
 var navBar = document.querySelector('nav');
 var ideaInputs = document.querySelector('section');
 var ideaBoard = document.querySelector('main');
@@ -32,16 +32,16 @@ function displayIdea(obj) {
   ideaBoard.insertAdjacentHTML(
     "afterbegin",`<article class="article" data-identifier="${obj.id}">
           <header class="article__header">
-            <img src="images/star.svg" id="star-img" alt="picture of a star white">
-            <img src="images/delete.svg" id="delete-x" alt="white x">
+            <img type="button" src="images/star.svg" id="star-img" alt="picture of a star white">
+            <img type="button" src="images/delete.svg" id="delete-x" alt="white x">
           </header>
           <div>
             <p class="article__title">${obj.title}</p>
             <p class="article__body">${obj.body}</p>
             <footer class="article__footer">
-              <img src="images/upvote.svg" id="up-arrow" alt="arrow pointing up white">
+              <img type="button" src="images/upvote.svg" id="up-arrow" alt="arrow pointing up white">
               <p class="article__quality"><span id="idea-quality">Quality: Swill</span></p>
-              <img src="images/downvote.svg" id="down-arrow" alt="arrow pointing down white">
+              <img type="button" src="images/downvote.svg" id="down-arrow" alt="arrow pointing down white">
           </div>
           </footer>
       </article>`
@@ -81,11 +81,29 @@ function navEventHandler (e) {
 
 document.querySelector('main').addEventListener('click', findIdeaToRemove)
 
+function getIdentifier(e) {
+  return e.target.closest("article").dataset.identifier;
+} 
+
+function findIndex(e) {
+  return ideasArray.findIndex(id => parseInt(getIdentifier(e)) === id.id);
+}
+
 function findIdeaToRemove(e) {
   if (e.target.closest('#delete-x')) {
     e.target.closest('article').remove();
-    var identifier = e.target.closest('article').dataset.identifier;
-    var index = ideasArray.findIndex(id => {return parseInt(identifier) === id.id});
-    ideasArray[index].deleteFromStorage(identifier);
+    ideasArray[findIndex(e)].deleteFromStorage(getIdentifier(e));
   }
+}
+
+function favoriteIdea(e) {
+  //images.star-active.svg
+  if (e.target.closest('#star-img')) {
+    
+
+
+  }
+  //on click toggle(switch) active star
+      //update star property in idea.js
+      //resave ideasArray to localStorage
 }
