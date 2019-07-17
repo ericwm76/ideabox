@@ -1,10 +1,10 @@
 class Idea {
-  constructor(title, body, star, quality, id) {
-    this.title = title;
-    this.body = body;
-    this.star = false;
-    this.quality = 0;
-    this.id = id || Date.now();
+  constructor(ideaObj) {
+    this.title = ideaObj.title;
+    this.body = ideaObj.body;
+    this.star = ideaObj.star || false;
+    this.quality = ideaObj.quality || 0;
+    this.id = ideaObj.id || Date.now();
   }
   
   saveToStorage(gblArray) {
