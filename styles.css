@@ -14,6 +14,7 @@ body {
   'nav main main main';
   font-family: 'Open Sans', sans-serif;
   height: 100vh;
+  background-color: ##eaeaf4
 }
 
 img {
@@ -176,6 +177,9 @@ main {
   grid-area: main;
   background-color: #eaeaf4;
   padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10% 2%;
 }
 
 article {
@@ -186,6 +190,13 @@ article header {
   display: flex;
   justify-content: space-between;
   background-color: #1F1F3D;
+}
+
+article div {
+  height:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 article p {
@@ -201,4 +212,5 @@ article footer {
 
 article footer p {
   margin: 0;
+  height: 26px;
 }
