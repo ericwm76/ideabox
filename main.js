@@ -1,4 +1,4 @@
-var ideasArray = JSON.parse(localStorage.getItem([])) || [];
+var ideasArray = JSON.parse(localStorage.getItem('array')) || [];
 var navBar = document.querySelector('nav');
 var ideaInputs = document.querySelector('section');
 var ideaBoard = document.querySelector('main');
@@ -8,6 +8,8 @@ var saveBtn = document.querySelector('#save-btn');
 
 ideaInputs.addEventListener('keyup', disableSave);
 ideaInputs.addEventListener('click', runAll);
+
+persisting(ideaInputs);
 
 function runAll(e) {
   e.preventDefault();
@@ -51,41 +53,16 @@ function clearInputs() {
 function createObj() {
   var newIdea = new Idea(titleInput.value, bodyInput.value, false, 0, Date.now());
   ideasArray.push(newIdea);
-  newIdea.saveToStorage();
+  newIdea.saveToStorage(ideasArray);
   console.log(ideasArray)
   displayIdea(newIdea);
 }
 
 function persisting() {
-   //get the array of ideas
-   //run through populator
-   //run populator on page load.
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+     ideasArray.forEach(function (element) {
+     displayIdea(element)
+   })
+ }
 
 document.querySelector('nav').addEventListener('click', navEventHandler);
 
@@ -99,7 +76,6 @@ function navEventHandler (e) {
   }
 }
 
-
 document.querySelector('main').addEventListener('click', findIdeaToRemove)
 
 function findIdeaToRemove(e) {
@@ -110,4 +86,3 @@ function findIdeaToRemove(e) {
     ideasArray[index].deleteFromStorage(identifier);
   }
 }
-

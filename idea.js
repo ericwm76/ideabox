@@ -7,8 +7,8 @@ class Idea {
     this.id = id || Date.now();
   }
   
-  saveToStorage() {
-    localStorage.setItem('array', JSON.stringify(ideasArray));
+  saveToStorage(gblArray) {
+    localStorage.setItem("array", JSON.stringify(gblArray));
   }
 
   deleteFromStorage(delID) {
