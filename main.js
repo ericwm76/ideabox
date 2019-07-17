@@ -1,4 +1,4 @@
-var ideasArray = JSON.parse(localStorage.getItem('array')).map(element => new Idea(element)) || [];
+var ideasArray = []
 var navBar = document.querySelector('nav');
 var ideaInputs = document.querySelector('section');
 var ideaBoard = document.querySelector('main');
@@ -6,10 +6,21 @@ var titleInput = document.querySelector('#title-input');
 var bodyInput = document.querySelector('#idea-body');
 var saveBtn = document.querySelector('#save-btn');
 
+startOnLoad();
+persisting(ideaInputs);
+
+function startOnLoad(){
+  if (JSON.parse(localStorage.getItem('array')) === null){
+    ideasArray = [];
+  } else {
+    ideasArray = JSON.parse(localStorage.getItem('array')).map(element => new Idea(element));
+  }
+}
+
 ideaInputs.addEventListener('keyup', disableSave);
 ideaInputs.addEventListener('click', runAll);
 
-persisting(ideaInputs);
+
 
 function runAll(e) {
   e.preventDefault();
@@ -79,7 +90,14 @@ function navEventHandler (e) {
   }
 }
 
-document.querySelector('main').addEventListener('focusout', saveCard)
+document.querySelector('main').addEventListener('focusout', saveCard);
+document.querySelector('main').addEventListener('keydown', saveOnEnter);
+
+function saveOnEnter(e){
+  if(e.keyCode === 13){
+    saveCard(e)
+  }
+}
 
 function saveCard(e){
   if (e.target.closest('.article__title')){
@@ -93,12 +111,6 @@ function saveCard(e){
     ideasArray[findIndex(e)].saveToStorage(ideasArray);
   }
 }
-
-
-
-
-
-
 
 document.querySelector('main').addEventListener('click', findIdeaToRemove)
 
