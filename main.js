@@ -1,4 +1,4 @@
-var ideasArray = JSON.parse(localStorage.getItem('array')) || [];
+var ideasArray = JSON.parse(localStorage.getItem('array')).map(function(element){ return new Idea(element)}) || [];
 var navBar = document.querySelector('nav');
 var ideaInputs = document.querySelector('section');
 var ideaBoard = document.querySelector('main');
@@ -54,7 +54,7 @@ function clearInputs() {
 }
 
 function createObj() {
-  var newIdea = new Idea(titleInput.value, bodyInput.value, false, 0, Date.now());
+  var newIdea = new Idea({title: titleInput.value, body: bodyInput.value, star: false, quality: 0, id: Date.now()});
   ideasArray.push(newIdea);
   newIdea.saveToStorage(ideasArray);
   console.log(ideasArray)
