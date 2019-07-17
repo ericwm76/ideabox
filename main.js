@@ -20,7 +20,7 @@ function runAll(e) {
 }
 
 function disableSave() {
-  if (titleInput.value === '' || bodyInput.value === '') {
+  if (document.querySelector('#title-input').value === '' || document.querySelector('#idea-body').value === '') {
     saveBtn.disabled = true;
   } else {
     saveBtn.disabled = false;
