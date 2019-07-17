@@ -34,12 +34,14 @@ function displayIdea(obj) {
             <img src="images/star.svg" id="star-img" alt="picture of a star white">
             <img src="images/delete.svg" id="delete-x" alt="white x">
           </header>
-          <p class="article__title">${obj.title}</p>
-          <p class="article__body">${obj.body}</p>
-          <footer class="article__footer">
-            <img src="images/upvote.svg" id="up-arrow" alt="arrow pointing up white">
-            <p class="article__quality"><span id="idea-quality">Quality: Swill</span></p>
-            <img src="images/downvote.svg" id="down-arrow" alt="arrow pointing down white">
+          <div>
+            <p class="article__title">${obj.title}</p>
+            <p class="article__body">${obj.body}</p>
+            <footer class="article__footer">
+              <img src="images/upvote.svg" id="up-arrow" alt="arrow pointing up white">
+              <p class="article__quality"><span id="idea-quality">Quality: Swill</span></p>
+              <img src="images/downvote.svg" id="down-arrow" alt="arrow pointing down white">
+          </div>
           </footer>
       </article>`
   );
