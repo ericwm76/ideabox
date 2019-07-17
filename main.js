@@ -27,15 +27,15 @@ function disableSave() {
   }
 }
 
-function displayIdea() {
+function displayIdea(obj) {
   ideaBoard.insertAdjacentHTML(
-    'afterbegin',`<article class="article">
+    "afterbegin",`<article class="article" data-identifier="${obj.id}">
           <header class="article__header">
             <img src="images/star.svg" id="star-img" alt="picture of a star white">
             <img src="images/delete.svg" id="delete-x" alt="white x">
           </header>
-          <p class="article__title">${titleInput.value}</p>
-          <p class="article__body">${bodyInput.value}</p>
+          <p class="article__title">${obj.title}</p>
+          <p class="article__body">${obj.body}</p>
           <footer class="article__footer">
             <img src="images/upvote.svg" id="up-arrow" alt="arrow pointing up white">
             <p class="article__quality"><span id="idea-quality">Quality: Swill</span></p>
@@ -55,11 +55,34 @@ function createObj() {
   ideasArray.push(newIdea);
   newIdea.saveToStorage(ideasArray);
   console.log(ideasArray)
-  displayIdea();
+  displayIdea(newIdea);
 }
 
 function persisting() {
-   ideasArray.forEach(function (element) {
+     ideasArray.forEach(function (element) {
      displayIdea(element)
    })
  }
+
+document.querySelector('nav').addEventListener('click', navEventHandler);
+
+function navEventHandler (e) {
+  if (e.target.closest('.swill-quality')) {
+    e.target.closest('.swill-quality').classList.add('swill-quality-active');
+    e.target.closest('.swill-quality').classList.remove('swill-quality');
+  } else if (e.target.closest('.swill-quality-active')) {
+        e.target.closest('.swill-quality-active').classList.add('swill-quality');
+    e.target.closest('.swill-quality-active').classList.remove('swill-quality-active');
+  }
+}
+
+document.querySelector('main').addEventListener('click', findIdeaToRemove)
+
+function findIdeaToRemove(e) {
+  if (e.target.closest('#delete-x')) {
+    e.target.closest('article').remove();
+    var identifier = e.target.closest('article').dataset.identifier;
+    var index = ideasArray.findIndex(id => {return parseInt(identifier) === id.id});
+    ideasArray[index].deleteFromStorage(identifier);
+  }
+}

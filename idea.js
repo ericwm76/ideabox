@@ -11,8 +11,10 @@ class Idea {
     localStorage.setItem("array", JSON.stringify(gblArray));
   }
 
-  deleteFromStorage() {}
-
+  deleteFromStorage(delID) {
+    ideasArray = ideasArray.filter(id => {return parseInt(delID) !== id.id})
+    this.saveToStorage();
+  }
   updateIdea() {}
 
   updateQuality() {}

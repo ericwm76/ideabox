@@ -73,7 +73,7 @@ nav button{
   text-align: left;
 }
 /*not a hover this is the selected state */
-.swill-quality:hover {
+.swill-quality-active {
   background-color: #D12119;
   border-bottom: none;
   border-left: 7px solid #F58E72;
