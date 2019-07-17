@@ -36,8 +36,8 @@ function displayIdea(obj) {
             <img type="button" src="images/delete.svg" id="delete-x" alt="white x">
           </header>
           <div>
-            <p class="article__title">${obj.title}</p>
-            <p class="article__body">${obj.body}</p>
+            <p contenteditable= "true" class="article__title">${obj.title}</p>
+            <p contenteditable= "true" class="article__body">${obj.body}</p>
             <footer class="article__footer">
               <img type="button" src="images/upvote.svg" id="up-arrow" alt="arrow pointing up white">
               <p class="article__quality"><span id="idea-quality">Quality: Swill</span></p>
@@ -78,6 +78,27 @@ function navEventHandler (e) {
     e.target.closest('.swill-quality-active').classList.remove('swill-quality-active');
   }
 }
+
+document.querySelector('main').addEventListener('focusout', saveCard)
+
+function saveCard(e){
+  if (e.target.closest('.article__title')){
+    var articleTitle = e.target.closest('.article__title').innerText;
+    ideasArray[findIndex(e)].title = articleTitle;
+    ideasArray[findIndex(e)].saveToStorage(ideasArray);
+  }
+  if (e.target.closest('.article__body')){
+    var articleBody = e.target.closest('.article__body').innerText;
+    ideasArray[findIndex(e)].body = articleBody;
+    ideasArray[findIndex(e)].saveToStorage(ideasArray);
+  }
+}
+
+
+
+
+
+
 
 document.querySelector('main').addEventListener('click', findIdeaToRemove)
 
