@@ -16,11 +16,12 @@ function runAll(e) {
   if (e.target.closest('#save-btn')) {
   createObj();
   clearInputs();
+  disableSave()
   }
 }
 
 function disableSave() {
-  if (document.querySelector('#title-input').value === '' || document.querySelector('#idea-body').value === '') {
+  if (titleInput.value === '' || bodyInput.value === '') {
     saveBtn.disabled = true;
   } else {
     saveBtn.disabled = false;
