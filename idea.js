@@ -13,7 +13,7 @@ class Idea {
 
   deleteFromStorage(delID) {
     ideasArray = ideasArray.filter(id => {return parseInt(delID) !== id.id})
-    this.saveToStorage();
+    this.saveToStorage(ideasArray);
   }
   updateIdea() {}
 
