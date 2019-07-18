@@ -38,10 +38,16 @@ function disableSave() {
 }
 
 function displayIdea(obj) {
+  var star;
+    if (obj.star === true) {
+      star = 'images/star-active.svg';
+    } else {
+      star = 'images/star.svg'
+    }
   ideaBoard.insertAdjacentHTML(
     "afterbegin",`<article class="article" data-identifier="${obj.id}">
           <header class="article__header">
-            <img type="button" src="images/star.svg" id="star-img" alt="picture of a star white">
+            <img type="button" src="${star}" id="star-img" alt="picture of a star white">
             <img type="button" src="images/delete.svg" id="delete-x" alt="white x">
           </header>
           <div>
@@ -116,7 +122,7 @@ function favoriteIdea(e) {
   var index = findIndex(e);
   var activeStar = 'images/star-active.svg'
   var inactiveStar = 'images/star.svg'
-  if (ideasArray[index].starred === true){
+  if (ideasArray[index].star === true){
     e.target.src = activeStar;
   } else {
     e.target.src = inactiveStar;
@@ -127,7 +133,7 @@ function saveStar(e) {
   if (e.target.closest("#star-img")) {
     console.log('hi')
     var index = findIndex(e);
-    ideasArray[index].starred = !ideasArray[index].starred;
+    ideasArray[index].star = !ideasArray[index].star;
     ideasArray[index].saveToStorage(ideasArray);
     favoriteIdea(e);
   }
