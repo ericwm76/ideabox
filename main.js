@@ -1,4 +1,4 @@
-var ideasArray = []
+var ideasArray = [];
 var navBar = document.querySelector('nav');
 var ideaInputs = document.querySelector('section');
 var ideaBoard = document.querySelector('main');
@@ -7,12 +7,12 @@ var bodyInput = document.querySelector('#idea-body');
 var saveBtn = document.querySelector('#save-btn');
 
 document.querySelector('nav').addEventListener('click', navEventHandler);
-document.querySelector('main').addEventListener('click', findIdeaToRemove)
+document.querySelector('main').addEventListener('click', updateArticle);
 document.querySelector('main').addEventListener('focusout', saveCard);
 document.querySelector('main').addEventListener('keydown', saveOnEnter);
 
 ideaInputs.addEventListener('keyup', disableSave);
-ideaInputs.addEventListener('click', runAll);
+ideaInputs.addEventListener("click", runAll);
 
 startOnLoad();
 persisting(ideaInputs);
@@ -43,10 +43,16 @@ function disableSave() {
 };
 
 function displayIdea(obj) {
+  var star;
+    if (obj.star === true) {
+      star = 'images/star-active.svg';
+    } else {
+      star = 'images/star.svg'
+    }
   ideaBoard.insertAdjacentHTML(
     "afterbegin",`<article class="article" data-identifier="${obj.id}">
           <header class="article__header">
-            <img type="button" src="images/star.svg" id="star-img" alt="picture of a star white">
+            <img type="button" src="${star}" id="star-img" alt="picture of a star white">
             <img type="button" src="images/delete.svg" id="delete-x" alt="white x">
           </header>
           <div>
@@ -90,6 +96,12 @@ function navEventHandler (e) {
   };
 };
 
+function updateArticle(e) {
+  e.preventDefault();
+  findIdeaToRemove(e);
+  saveStar(e);
+};
+
 function saveOnEnter(e){
   if(e.keyCode === 13){
     saveCard(e)
@@ -125,13 +137,22 @@ function findIdeaToRemove(e) {
 };
 
 function favoriteIdea(e) {
-  //images.star-active.svg
-  if (e.target.closest('#star-img')) {
-    
+  var index = findIndex(e);
+  var activeStar = 'images/star-active.svg'
+  var inactiveStar = 'images/star.svg'
+  if (ideasArray[index].star === true){
+    e.target.src = activeStar;
+  } else {
+    e.target.src = inactiveStar;
+  };
+};
 
-
-  }
-  //on click toggle(switch) active star
-      //update star property in idea.js
-      //resave ideasArray to localStorage
-}
+function saveStar(e) {
+  if (e.target.closest("#star-img")) {
+    console.log('hi')
+    var index = findIndex(e);
+    ideasArray[index].star = !ideasArray[index].star;
+    ideasArray[index].saveToStorage(ideasArray);
+    favoriteIdea(e);
+  };
+};
