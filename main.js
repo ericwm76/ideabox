@@ -10,7 +10,7 @@ document.querySelector('nav').addEventListener('click', navEventHandler);
 document.querySelector('main').addEventListener('click', updateArticle);
 document.querySelector('main').addEventListener('focusout', saveCard);
 document.querySelector('main').addEventListener('keydown', saveOnEnter);
-
+document.querySelector('#search-input').addEventListener('keyup', repopulateMain)
 ideaInputs.addEventListener('keyup', disableSave);
 ideaInputs.addEventListener("click", runAll);
 
@@ -52,16 +52,16 @@ function displayIdea(obj) {
   ideaBoard.insertAdjacentHTML(
     "afterbegin",`<article class="article" data-identifier="${obj.id}">
           <header class="article__header">
-            <img type="button" src="${star}" id="star-img" alt="picture of a star white">
-            <img type="button" src="images/delete.svg" id="delete-x" alt="white x">
+            <img src="${star}" id="star-img" alt="picture of a star white">
+            <img src="images/delete.svg" id="delete-x" alt="white x">
           </header>
           <div>
             <p contenteditable= "true" class="article__title">${obj.title}</p>
             <p contenteditable= "true" class="article__body">${obj.body}</p>
             <footer class="article__footer">
-              <img type="button" src="images/upvote.svg" id="up-arrow" alt="arrow pointing up white">
+              <img src="images/upvote.svg" id="up-arrow" alt="arrow pointing up white">
               <p class="article__quality"><span id="idea-quality">Quality: Swill</span></p>
-              <img type="button" src="images/downvote.svg" id="down-arrow" alt="arrow pointing down white">
+              <img src="images/downvote.svg" id="down-arrow" alt="arrow pointing down white">
           </div>
           </footer>
       </article>`
@@ -156,3 +156,27 @@ function saveStar(e) {
     favoriteIdea(e);
   };
 };
+
+
+function filterBySearch(){ 
+return ideasArray.filter(function(idObj) {
+    return idObj.body.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase()) 
+     || idObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase());
+  });
+};
+
+function clearMain(){
+  document.querySelector('main').innerHTML = '';
+};
+
+function repopulateMain() {
+  clearMain()
+  filterBySearch().forEach(function (element) {
+  displayIdea(element)
+  });
+  if (document.querySelector('#search-input').value === ''){
+    clearMain()
+    persisting()
+  }
+};
+
