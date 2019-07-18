@@ -10,7 +10,7 @@ document.querySelector('nav').addEventListener('click', navEventHandler);
 document.querySelector('main').addEventListener('click', updateArticle);
 document.querySelector('main').addEventListener('focusout', saveCard);
 document.querySelector('main').addEventListener('keydown', saveOnEnter);
-
+document.querySelector('#search-input').addEventListener('keyup', repopulateMain)
 ideaInputs.addEventListener('keyup', disableSave);
 ideaInputs.addEventListener("click", runAll);
 
@@ -159,9 +159,20 @@ function saveStar(e) {
 
 
 function filterBySearch(){ 
-var arrayShownIdeas = ideasArray.filter(function(idObj) {
+return ideasArray.filter(function(idObj) {
     return idObj.body.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase()) 
      || idObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase());
   });
-  return arrayShownIdeas;
-}
+};
+
+function clearMain(){
+  document.querySelector('main').innerHTML = '';
+};
+
+function repopulateMain() {
+  clearMain()
+  filterBySearch().forEach(function (element) {
+  displayIdea(element)
+  });
+};
+
