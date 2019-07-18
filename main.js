@@ -81,8 +81,8 @@ function createObj() {
 };
 
 function persisting() {
-     ideasArray.forEach(function (element) {
-     displayIdea(element)
+    ideasArray.forEach(function (idea) {
+     displayIdea(idea)
    });
  };
 
@@ -165,17 +165,15 @@ return ideasArray.filter(function(idObj) {
   });
 };
 
-function clearMain(){
-  document.querySelector('main').innerHTML = '';
+function clearIdeaBoard(){
+  ideaBoard.innerHTML = '';
 };
 
 function repopulateMain() {
-  clearMain()
-  filterBySearch().forEach(function (element) {
-  displayIdea(element)
-  });
+  clearIdeaBoard()
+  filterBySearch().forEach(element => displayIdea(element));
   if (document.querySelector('#search-input').value === ''){
-    clearMain()
+    clearIdeaBoard()
     persisting()
   }
 };
