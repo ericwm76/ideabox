@@ -1,4 +1,4 @@
-var ideasArray = JSON.parse(localStorage.getItem('array')).map(element => new Idea(element)) || [];
+var ideasArray = [];
 var navBar = document.querySelector('nav');
 var ideaInputs = document.querySelector('section');
 var ideaBoard = document.querySelector('main');
@@ -7,9 +7,18 @@ var bodyInput = document.querySelector('#idea-body');
 var saveBtn = document.querySelector('#save-btn');
 
 ideaInputs.addEventListener('keyup', disableSave);
-ideaInputs.addEventListener('click', runAll);
+ideaInputs.addEventListener("click", runAll);
 
+startOnLoad();
 persisting(ideaInputs);
+
+function startOnLoad(){
+  if (JSON.parse(localStorage.getItem('array')) === null){
+    ideasArray = [];
+  } else {
+    ideasArray = JSON.parse(localStorage.getItem('array')).map(element => new Idea(element));
+  };
+};
 
 function runAll(e) {
   e.preventDefault();
@@ -79,7 +88,14 @@ function navEventHandler (e) {
   }
 }
 
-document.querySelector('main').addEventListener('click', findIdeaToRemove)
+document.querySelector('main').addEventListener
+('click', updateArticle);
+
+function updateArticle(e) {
+  e.preventDefault();
+  findIdeaToRemove(e);
+  saveStar(e);
+}
 
 function getIdentifier(e) {
   return e.target.closest("article").dataset.identifier;
@@ -97,13 +113,22 @@ function findIdeaToRemove(e) {
 }
 
 function favoriteIdea(e) {
-  //images.star-active.svg
-  if (e.target.closest('#star-img')) {
-    
-
-
+  var index = findIndex(e);
+  var activeStar = 'images/star-active.svg'
+  var inactiveStar = 'images/star.svg'
+  if (ideasArray[index].starred === true){
+    e.target.src = activeStar;
+  } else {
+    e.target.src = inactiveStar;
   }
-  //on click toggle(switch) active star
-      //update star property in idea.js
-      //resave ideasArray to localStorage
+}
+
+function saveStar(e) {
+  if (e.target.closest("#star-img")) {
+    console.log('hi')
+    var index = findIndex(e);
+    ideasArray[index].starred = !ideasArray[index].starred;
+    ideasArray[index].saveToStorage(ideasArray);
+    favoriteIdea(e);
+  }
 }
