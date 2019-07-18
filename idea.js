@@ -15,12 +15,12 @@ class Idea {
     ideasArray = ideasArray.filter(id => {return parseInt(delID) !== id.id})
     this.saveToStorage(ideasArray);
   }
-  
-  updateIdea() {
 
+  updateIdea() {
+    localStorage.setItem("array", JSON.stringify(gblArray));
   }
 
   updateQuality() {
-    
+    localStorage.setItem("array", JSON.stringify(gblArray));
   }
 }
