@@ -156,3 +156,12 @@ function saveStar(e) {
     favoriteIdea(e);
   };
 };
+
+
+function filterBySearch(){ 
+var arrayShownIdeas = ideasArray.filter(function(idObj) {
+    return idObj.body.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase()) 
+     || idObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase());
+  });
+  return arrayShownIdeas;
+}
