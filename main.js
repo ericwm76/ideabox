@@ -174,5 +174,9 @@ function repopulateMain() {
   filterBySearch().forEach(function (element) {
   displayIdea(element)
   });
+  if (document.querySelector('#search-input').value === ''){
+    clearMain()
+    persisting()
+  }
 };
 
