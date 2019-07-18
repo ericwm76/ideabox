@@ -8,7 +8,7 @@
 body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 40% 1fr;
+  grid-template-rows: 55% 1fr;
   grid-template-areas: 
   'nav section section section'
   'nav main main main';
@@ -18,8 +18,8 @@ body {
 }
 
 img {
-  height: 25px;
-  width: 25px;
+  height: 30px;
+  width: 30px;
 }
 button:focus {outline:0;}
 
@@ -36,29 +36,30 @@ nav h1 {
   font-size: 1.25em;
   font-weight: 700;
   padding: 15px;
-  margin: 0;
-  border-bottom: 1px solid #353567;
+  margin: 10px 0px;
+  border-bottom: 3px solid #353567;
 }
 
 nav h6 {
   color: #5356A4;
-  font-size: .8em;
+  font-size: .95em;
   padding: 15px;
-  font-weight: 400;
-  margin: 0;
+  margin: 10px 0px;
 }
 
 .filter-header {
-    border-top: 1px solid #353567;
+    border-top: 3px solid #353567;
+    padding-top: 20px;
 }
 
 nav button{
-  
   background-color: #5356A4;
   color: #E9E9F3;
   border: 1px solid #5356A4;
   padding: 10px 0px 10px 0px;
-  margin: 0px 15px 15px 15px;
+  margin: 10px 15px 25px;
+  font-size: 1.25em;
+  font-weight: 700;
 }
 
 /* middle 3 buttons */
@@ -72,6 +73,8 @@ nav button{
   margin: 0px;
   padding: 10px 0px 10px 8px;
   text-align: left;
+  font-size: 1.2em;
+  font-weight: 400;
 }
 /*not a hover this is the selected state */
 .swill-quality-active {
@@ -84,22 +87,31 @@ nav button{
   margin: 0px;
   padding: 10px 0px 10px 8px;
   text-align: left;
+  font-size: 1.2em;
+  font-weight: 400;
 }
  #quality-btn {
   margin-left: 0px;
   width:100%;
+  border-radius: 3px;
  }
+
+#show-star-btn {
+  border-radius: 3px;
+}
+
+
 nav form {
   padding:0px 15px;
-  border-bottom: 1px solid #353567;
+  border-bottom: 3px solid #353567;
 }
 
 nav form label {
+  color: #5356A4;
+  font-size: .95em;
   display: block;
-  font-size: .8em;
-  color: #BFBFDD;
-  font-weight: 400;
-  margin: 15px 0px;
+  font-weight: 700;
+  margin: 15px 0px 7px;
 }
 nav form input {
   color: #5356A4;
@@ -111,7 +123,7 @@ nav form input {
 section {
   grid-area: section;
   background-color: #A9AAD2;
-  padding: 10px 25%;
+  padding: 10px 27%;
 }
 
 section form {
@@ -123,41 +135,50 @@ section form label{
     font-weight: 700;
     color: #1F1F3D;
     font-size: 1em;
-    margin: 20px 0px 10px 0px;
+    margin: 15px 0px 10px 0px;
 }
 
 section form div img{
-  margin: 7px;
-  height: 20px;
-  width: 20px;
+  margin: 12px;
+  height: 24px;
+  width: 24px;
 }
 
 section form input {
   color:#5356A4;
-  margin-bottom: 15jpx;
+  margin-bottom: 15px;
   border: 1px solid #353567;
-  height: 15%;
+  height: 11%;
+  padding: 5px;
+  border-radius: 3px;
 }
 
 section form textarea {
   color:#5356A4;  
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   border: 1px solid #353567;
   resize: none;
-  height: 20%;
+  height: 24%;
+  padding: 5px;
+  border-radius: 3px;
 }
 
 section form button {
   color: #FFFFFF;
   background-color: #353567;
   border: #353567;
-  margin-bottom: 15px;
-  padding: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 3px;
+  font-size: 1.2em;
+  letter-spacing: 1px;
 }
 
 section div {
   display: flex;
   background-color: #353567;
+  height: 12%;
+  border-radius: 3px;
 }
 
 section div input {
@@ -169,8 +190,7 @@ section div input {
 
 ::placeholder {
   color:#5356A4;
-  font-size: .7em;
-  padding: 10px;
+  font-size: .9em;
 }
 
 main {
@@ -183,13 +203,16 @@ main {
 }
 
 article {
+  height: fit-content;
   background-color: white;
+  border: 2px solid #1F1F3D;
 }
 
 article header {
   display: flex;
   justify-content: space-between;
   background-color: #1F1F3D;
+  padding: 3px;
 }
 
 article div {
@@ -200,7 +223,19 @@ article div {
 }
 
 article p {
-  margin: 12px;
+  margin: 8px 12px;
+}
+
+.article__title {
+  font-weight: 700;
+  margin-top: 20px;
+  font-size: 1.2em;
+}
+
+.article__body {
+  margin-bottom: 24px;
+  font-size: 1.2em;
+  line-height: 1.4em;
 }
 
 article footer {
@@ -208,9 +243,11 @@ article footer {
   justify-content: space-between;
   color: #FFFFFF;
   background-color: #5356A4;
+  padding: 8px 5px;
+  align-items: center;
+  height: 41px;
 }
 
 article footer p {
   margin: 0;
-  height: 26px;
 }
