@@ -129,7 +129,6 @@ function getIdentifier(e) {
 };
 
 function getIndex(e) {
-  // console.log(getIdentifier(e));
   return ideasArray.findIndex(function(id) {
     return parseInt(getIdentifier(e)) === id.id
   });
