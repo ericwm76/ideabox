@@ -251,3 +251,25 @@ article footer {
 article footer p {
   margin: 0;
 }
+
+
+
+card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:300%;
+  height:300px;
+  border-radius:150px;
+  margin-left: auto;
+  border: 2px dashed #5356A4;
+  align-self: center;
+  justify-self: center;
+  background-color: ##eaeaf4;
+
+}
+
+card p {
+  width:200px;
+  background-color: ##eaeaf4
+}

@@ -1,4 +1,5 @@
 var ideasArray = [];
+var qualitiesArray = ['Quality: Swill', 'Quality: Plausible', 'Quality: Genius']
 var navBar = document.querySelector('nav');
 var ideaInputs = document.querySelector('section');
 var ideaBoard = document.querySelector('main');
@@ -62,7 +63,7 @@ function displayIdea(ideaObj) {
             <p contenteditable= "true" class="article__body">${ideaObj.body}</p>
             <footer class="article__footer">
               <img src="images/upvote.svg" id="up-arrow" alt="arrow pointing up white">
-              <p class="article__quality"><span id="idea-quality">Quality: Swill</span></p>
+              <p class="article__quality" id="idea-quality">Quality: Swill</span></p>
               <img src="images/downvote.svg" id="down-arrow" alt="arrow pointing down white">
           </div>
           </footer>
@@ -102,6 +103,7 @@ function updateArticle(e) {
   e.preventDefault();
   findIdeaToRemove(e);
   saveStar(e);
+  changeQuality(e);
 };
 
 function saveOnEnter(e) {
@@ -124,6 +126,38 @@ function saveCard(e) {
   };
 };
 
+function changeQuality(e){
+  if (e.target.id === 'up-arrow' && ideasArray[getIndex(e)].quality < qualitiesArray.length - 1) {
+    ideasArray[getIndex(e)].quality++;
+    ideasArray[getIndex(e)].saveToStorage(ideasArray);  
+    changeQualityText(e);
+  }
+  if (e.target.id === 'down-arrow' && ideasArray[getIndex(e)].quality > 0){
+    ideasArray[getIndex(e)].quality--
+    ideasArray[getIndex(e)].saveToStorage(ideasArray);
+    changeQualityText(e);  
+  }
+}
+
+function changeQualityText(e){
+  console.log(e.target.parentNode.childNodes)
+  e.target.parentNode.childNodes[3].innerText = qualitiesArray[ideasArray[getIndex(e)].quality];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function getIdentifier(e) {
   return e.target.closest("article").dataset.identifier;
 };
@@ -136,7 +170,6 @@ function getIndex(e) {
 
 function findIdeaToRemove(e) {
   if (e.target.closest('#delete-x')) {
-    console.log(ideasArray[getIndex(e)]);
     e.target.closest('article').remove();
     ideasArray[getIndex(e)].deleteFromStorage(getIdentifier(e));
   };
@@ -155,7 +188,6 @@ function favoriteIdea(e) {
 
 function saveStar(e) {
   if (e.target.closest("#star-img")) {
-    console.log('hi')
     var index = getIndex(e);
     ideasArray[index].star = !ideasArray[index].star;
     ideasArray[index].saveToStorage(ideasArray);
