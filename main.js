@@ -45,12 +45,14 @@ function disableSave() {
 
 function displayIdea(ideaObj) {
   var star;
-
+  var qualityText = qualitiesArray[ideaObj.quality]
   if (ideaObj.star === true) {
     star = 'images/star-active.svg';
   } else {
     star = 'images/star.svg';
   }
+
+  
 
   ideaBoard.insertAdjacentHTML(
     "afterbegin",`<article class="article" data-identifier="${ideaObj.id}">
@@ -63,7 +65,7 @@ function displayIdea(ideaObj) {
             <p contenteditable= "true" class="article__body">${ideaObj.body}</p>
             <footer class="article__footer">
               <img src="images/upvote.svg" id="up-arrow" alt="arrow pointing up white">
-              <p class="article__quality" id="idea-quality">Quality: Swill</span></p>
+              <p class="article__quality" id="idea-quality">${qualityText}</span></p>
               <img src="images/downvote.svg" id="down-arrow" alt="arrow pointing down white">
           </div>
           </footer>
