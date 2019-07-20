@@ -198,14 +198,18 @@ main {
   background-color: #eaeaf4;
   padding: 20px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /*grid-template-columns: repeat(3, 1fr);*/
   grid-gap: 10% 2%;
+    /*display: grid;*/
+    grid-template-columns: repeat(auto-fit, minmax(min-content, 400px))
+  }
 }
 
 article {
   height: fit-content;
   background-color: white;
   border: 2px solid #1F1F3D;
+  max-width: 250px;
 }
 
 article header {
@@ -273,3 +277,60 @@ card p {
   width:200px;
   background-color: ##eaeaf4
 }
+
+@media screen and (max-width: 900px) {
+  body {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 10vh 50vh auto;
+  grid-template-areas: 
+      'nav'
+      'section'
+      'main';
+  }
+
+  section {
+    padding: 10px auto;
+  }
+
+  section form {
+    max-width: 500px;
+    min-width: 350px;
+  }
+
+  main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min-content, 400px))
+  }
+}
+
+@media screen and (max-width: 500px) {
+  body {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 10vh 50vh auto;
+  grid-template-areas: 
+      'nav'
+      'section'
+      'main';
+  }
+
+  section {
+    padding: 10px 5%;
+  }
+
+  main {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 2% 2%;
+
+}
+
+  article {
+    grid-column: 
+  }
+}
+
+
+
