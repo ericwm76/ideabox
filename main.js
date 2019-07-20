@@ -90,20 +90,21 @@ function persistOnLoad() {
  };
 
 function navEventHandler(e) {
-  e.target.parentNode.childNodes[9].classList.remove('swill-quality-active');
-  e.target.parentNode.childNodes[9].classList.add('swill-quality');
-  e.target.parentNode.childNodes[11].classList.remove('swill-quality-active');
-  e.target.parentNode.childNodes[11].classList.add('swill-quality');
-  e.target.parentNode.childNodes[13].classList.remove('swill-quality-active');
-  e.target.parentNode.childNodes[13].classList.add('swill-quality');  
-  e.target.closest('.nav__button').classList.add('swill-quality-active');  
-//   if (e.target.closest('.swill-quality')) {
-//     e.target.closest('.swill-quality').classList.add('swill-quality-active');
-//     e.target.closest('.swill-quality').classList.remove('swill-quality');
-//   } else if (e.target.closest('.swill-quality-active')) {
-//     e.target.closest('.swill-quality-active').classList.add('swill-quality');
-//     e.target.closest('.swill-quality-active').classList.remove('swill-quality-active');
-//   };
+//do we want to go get the node list or just set it to [9, 11,13]?
+  var nodesIndexList = [];
+  var parentChildNodes = e.target.parentNode.childNodes;
+  for (var i = 0 ; i < parentChildNodes.length; i++){
+    if (parentChildNodes[i].id === 'js-switch'){
+      nodesIndexList.push(i)
+    }
+  }
+
+  nodesIndexList.forEach(function(index){
+    parentChildNodes[index].classList.add('swill-quality');
+    parentChildNodes[index].classList.remove('swill-quality-active');
+  })
+
+  e.target.closest('.nav__button').classList.add('swill-quality-active'); 
 };
 
 function updateArticle(e) {
