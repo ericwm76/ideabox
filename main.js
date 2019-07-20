@@ -52,8 +52,6 @@ function displayIdea(ideaObj) {
     star = 'images/star.svg';
   }
 
-  
-
   ideaBoard.insertAdjacentHTML(
     "afterbegin",`<article class="article" data-identifier="${ideaObj.id}">
           <header class="article__header">
@@ -92,13 +90,20 @@ function persistOnLoad() {
  };
 
 function navEventHandler(e) {
-  if (e.target.closest('.swill-quality')) {
-    e.target.closest('.swill-quality').classList.add('swill-quality-active');
-    e.target.closest('.swill-quality').classList.remove('swill-quality');
-  } else if (e.target.closest('.swill-quality-active')) {
-    e.target.closest('.swill-quality-active').classList.add('swill-quality');
-    e.target.closest('.swill-quality-active').classList.remove('swill-quality-active');
-  };
+  e.target.parentNode.childNodes[9].classList.remove('swill-quality-active');
+  e.target.parentNode.childNodes[9].classList.add('swill-quality');
+  e.target.parentNode.childNodes[11].classList.remove('swill-quality-active');
+  e.target.parentNode.childNodes[11].classList.add('swill-quality');
+  e.target.parentNode.childNodes[13].classList.remove('swill-quality-active');
+  e.target.parentNode.childNodes[13].classList.add('swill-quality');  
+  e.target.closest('.nav__button').classList.add('swill-quality-active');  
+//   if (e.target.closest('.swill-quality')) {
+//     e.target.closest('.swill-quality').classList.add('swill-quality-active');
+//     e.target.closest('.swill-quality').classList.remove('swill-quality');
+//   } else if (e.target.closest('.swill-quality-active')) {
+//     e.target.closest('.swill-quality-active').classList.add('swill-quality');
+//     e.target.closest('.swill-quality-active').classList.remove('swill-quality-active');
+//   };
 };
 
 function updateArticle(e) {
@@ -143,23 +148,8 @@ function changeQuality(e){
 }
 
 function changeQualityText(e){
-  console.log(e.target.parentNode.childNodes)
   e.target.parentNode.childNodes[3].innerText = qualitiesArray[ideasArray[getIndex(e)].quality];
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function getIdentifier(e) {
   return e.target.closest("article").dataset.identifier;
