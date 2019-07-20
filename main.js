@@ -7,6 +7,7 @@ var titleInput = document.querySelector('#title-input');
 var bodyInput = document.querySelector('#idea-body');
 var saveBtn = document.querySelector('#save-btn');
 
+
 document.querySelector('nav').addEventListener('click', navEventHandler);
 ideaBoard.addEventListener('click', updateArticle);
 ideaBoard.addEventListener('focusout', saveCard);
@@ -160,7 +161,6 @@ function changeQualityText(e){
 
 
 
-
 function getIdentifier(e) {
   return e.target.closest("article").dataset.identifier;
 };
@@ -217,3 +217,16 @@ function repopulateMain() {
     persistOnLoad();
   };
 };
+
+var navListener = document.querySelector("nav");
+navListener.addEventListener('click', filterStar)
+
+function filterStar(e) {
+  if (e.target.closest('#show-star-btn')) {
+    var favIdeas = ideasArray.filter(function(ideaObj) {
+      if (ideaObj.star === true) {
+        console.log(favIdeas)
+      }
+    })
+  }
+}
