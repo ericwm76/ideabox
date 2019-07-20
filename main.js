@@ -17,7 +17,7 @@ ideaInputs.addEventListener('keyup', disableSave);
 ideaInputs.addEventListener("click", runAll);
 
 startOnLoad();
-persistOnLoad(ideaInputs);
+persistOnLoad();
 
 function startOnLoad() {
   if (JSON.parse(localStorage.getItem('array')) === null) {
@@ -91,21 +91,20 @@ function persistOnLoad() {
  };
 
 function navEventHandler(e) {
-//do we want to go get the node list or just set it to [9, 11,13]?
-  var nodesIndexList = [];
-  var pCNodes = e.target.parentNode.childNodes;
-  for (var i = 0 ; i < pCNodes.length; i++){
-    if (pCNodes[i].id === 'js-switch'){
-      nodesIndexList.push(i)
-    }
-  }
-
-  nodesIndexList.forEach(function(index){
-    pCNodes[index].classList.add('swill-quality');
-    pCNodes[index].classList.remove('swill-quality-active');
-  })
-
-  e.target.closest('.nav__button').classList.add('swill-quality-active'); 
+  if( e.target.closest('#js-switch')){
+    var nodesIndexList = [];
+    var pCNodes = e.target.parentNode.childNodes;
+    for (var i = 0 ; i < pCNodes.length; i++){
+      if (pCNodes[i].id === 'js-switch'){
+        nodesIndexList.push(i)
+      };
+    };
+    nodesIndexList.forEach(function(index){
+      pCNodes[index].classList.add('swill-quality');
+      pCNodes[index].classList.remove('swill-quality-active');
+    });
+    e.target.closest('#js-switch').classList.add('swill-quality-active');
+  }; 
 };
 
 function updateArticle(e) {
@@ -191,7 +190,7 @@ function saveStar(e) {
 };
 
 function compareArray(array1, array2) {
-  console.log('hi');
+  // console.log('hi');
   clearIdeaBoard();
   var searchArray = [];
   array1.forEach(function(ideaObj) {
@@ -200,7 +199,7 @@ function compareArray(array1, array2) {
       displayIdea(ideaObj);
     }
   })
-  console.log(searchArray)
+  // console.log(searchArray)
   return searchArray
 }
 
@@ -229,14 +228,22 @@ navListener.addEventListener('click', filterStar)
 
 function filterStar(e) {
   var favIdeas = [];
-  if (e.target.closest('#show-star-btn')) {
-    ideasArray.filter(function(ideaObj) {
-      if (ideaObj.star === true) {
-        favIdeas.push(ideaObj)
-      }
-    })
-    // console.log(favIdeas)
-    compareArray(favIdeas, ideasArray)
-    return favIdeas
+  if (e.target.id === 'show-star-btn'){
+    if (e.target.classList.contains('nav__button') && e.target.classList.contains('active')) {
+      e.target.classList.remove('active')
+      e.target.innerHTML = 'Show Stared Ideas';
+      clearIdeaBoard();
+      persistOnLoad();
+      } else {
+      e.target.innerHTML = 'View All Ideas';
+      e.target.classList.add('active');  
+      ideasArray.filter(function(ideaObj) {
+        if (ideaObj.star === true) {
+          favIdeas.push(ideaObj);
+        }
+      })
+      compareArray(favIdeas, ideasArray);
+      return favIdeas
+    } 
   }
 }

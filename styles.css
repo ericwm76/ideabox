@@ -52,6 +52,11 @@ nav h6 {
     padding-top: 20px;
 }
 
+.active{
+  background-color: #D12119;
+  border: 1px solid #F58E72;
+}
+
 nav button{
   background-color: #5356A4;
   color: #E9E9F3;
