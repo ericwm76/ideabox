@@ -92,16 +92,16 @@ function persistOnLoad() {
 function navEventHandler(e) {
 //do we want to go get the node list or just set it to [9, 11,13]?
   var nodesIndexList = [];
-  var parentChildNodes = e.target.parentNode.childNodes;
-  for (var i = 0 ; i < parentChildNodes.length; i++){
-    if (parentChildNodes[i].id === 'js-switch'){
+  var pCNodes = e.target.parentNode.childNodes;
+  for (var i = 0 ; i < pCNodes.length; i++){
+    if (pCNodes[i].id === 'js-switch'){
       nodesIndexList.push(i)
     }
   }
 
   nodesIndexList.forEach(function(index){
-    parentChildNodes[index].classList.add('swill-quality');
-    parentChildNodes[index].classList.remove('swill-quality-active');
+    pCNodes[index].classList.add('swill-quality');
+    pCNodes[index].classList.remove('swill-quality-active');
   })
 
   e.target.closest('.nav__button').classList.add('swill-quality-active'); 
