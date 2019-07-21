@@ -20,7 +20,6 @@ startOnLoad();
 persistOnLoad();
 injectIntro(); 
 
-
 function startOnLoad() {
   if (JSON.parse(localStorage.getItem('array')) === null) {
     ideasArray = [];
@@ -268,5 +267,29 @@ function removeIntro(){
   element.parentNode.removeChild(element);
   }  
 }
+navListener.addEventListener('click', showMoreLess)
 
+function showMoreLess (e) { 
+  if (e.target.id === 'more-less-btn'){
+    if (e.target.classList.contains('nav__button') && e.target.classList.contains('active')) {
+      console.log('active');
+      e.target.classList.remove('active')
+      e.target.innerHTML = 'Show Less';
+      clearIdeaBoard();
+      persistOnLoad();
+    } else {
+      console.log('else')
+      e.target.innerHTML = 'Show More';
+      e.target.classList.add('active');
+      var lessIdeas = [];
+      for (var i = 0; i < 10; i++){
+        lessIdeas.push(ideasArray[i])
+      }; 
+      clearIdeaBoard()
+      lessIdeas.forEach(function(idea) {
+      displayIdea(idea);
+      })
+    } 
+  }
+}
 
