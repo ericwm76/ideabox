@@ -267,6 +267,7 @@ function removeIntro(){
   element.parentNode.removeChild(element);
   }  
 }
+
 navListener.addEventListener('click', showMoreLess)
 
 function showMoreLess (e) { 
