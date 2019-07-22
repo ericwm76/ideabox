@@ -1,5 +1,5 @@
 var ideasArray = [];
-var qualitiesArray = ['Quality: Swill', 'Quality: Plausible', 'Quality: Genius']
+var qualitiesArray = [[], [], []];
 var navBar = document.querySelector('nav');
 var ideaInputs = document.querySelector('section');
 var ideaBoard = document.querySelector('main');
@@ -18,7 +18,6 @@ ideaInputs.addEventListener("click", runAll);
 
 startOnLoad();
 persistOnLoad();
-// showTenOnLoad();
 injectIntro(); 
 
 function showTenOnLoad() {
@@ -37,6 +36,8 @@ function startOnLoad() {
     ideasArray = [];
   } else {
     ideasArray = JSON.parse(localStorage.getItem('array')).map(element => new Idea(element));
+    sortIdeas();
+    showTenOnLoad();
   };
 };
 
@@ -58,12 +59,15 @@ function disableSave() {
 };
 
 function displayIdea(ideaObj) {
-  var star;
-  var qualityText = qualitiesArray[ideaObj.quality]
+  var qualityText = [
+    "Quality: Swill",
+    "Quality: Plausible",
+    "Quality: Genius"
+  ];
   if (ideaObj.star === true) {
-    star = 'images/star-active.svg';
+    var star = 'images/star-active.svg';
   } else {
-    star = 'images/star.svg';
+    var star = 'images/star.svg';
   }
 
   ideaBoard.insertAdjacentHTML(
@@ -77,7 +81,7 @@ function displayIdea(ideaObj) {
             <p contenteditable= "true" class="article__body">${ideaObj.body}</p>
             <footer class="article__footer">
               <img src="images/upvote.svg" id="up-arrow" alt="arrow pointing up white">
-              <p class="article__quality" id="idea-quality">${qualityText}</span></p>
+              <p class="article__quality" id="idea-quality">${qualityText[ideaObj.quality]}</span></p>
               <img src="images/downvote.svg" id="down-arrow" alt="arrow pointing down white">
           </div>
           </footer>
@@ -94,7 +98,8 @@ function createObj() {
   var newIdea = new Idea({title: titleInput.value, body: bodyInput.value, star: false, quality: 0, id: Date.now()});
   ideasArray.push(newIdea);
   newIdea.saveToStorage(ideasArray);
-  removeIntro()
+  sortIdeas();
+  removeIntro();
   displayIdea(newIdea);
 };
 
@@ -105,20 +110,12 @@ function persistOnLoad() {
  };
 
 function navEventHandler(e) {
-  if (e.target.closest('#js-switch')) {
-    var nodesIndexList = [];
-    var pCNodes = e.target.parentNode.childNodes;
-    for (var i = 0 ; i < pCNodes.length; i++) {
-      if (pCNodes[i].id === 'js-switch') {
-        nodesIndexList.push(i)
-      };
-    };
-    nodesIndexList.forEach(function(index) {
-      pCNodes[index].classList.add('swill-quality');
-      pCNodes[index].classList.remove('swill-quality-active');
+    var nodesIndexList = document.querySelectorAll('.js-switch')
+    nodesIndexList.forEach(function(index){
+      index.classList.add('swill-quality');
+      index.classList.remove('swill-quality-active');
     });
-    e.target.closest('#js-switch').classList.add('swill-quality-active');
-  } 
+    e.target.closest('.js-switch').classList.add('swill-quality-active'); 
   if (e.target.closest('#menu-button')) {
     console.log('hamburger')
     if (e.target.src === "images/menu.svg") {
@@ -128,7 +125,7 @@ function navEventHandler(e) {
     document.querySelector('#menu-active').classList.add('menu');
     e.target.src = 'images/menu.svg';
     };
-  };
+  };  
 };
 
 function updateArticle(e) {
@@ -150,12 +147,14 @@ function saveCard(e) {
     var articleTitle = e.target.closest('.article__title').innerText;
     ideasArray[getIndex(e)].title = articleTitle;
     ideasArray[getIndex(e)].saveToStorage(ideasArray);
+    sortIdeas();
   };
 
   if (e.target.closest('.article__body')) {
     var articleBody = e.target.closest('.article__body').innerText;
     ideasArray[getIndex(e)].body = articleBody;
     ideasArray[getIndex(e)].saveToStorage(ideasArray);
+    sortIdeas();
   };
 };
 
@@ -163,19 +162,24 @@ function changeQuality(e){
   if (e.target.id === 'up-arrow' && ideasArray[getIndex(e)].quality < qualitiesArray.length - 1) {
     ideasArray[getIndex(e)].quality++;
     ideasArray[getIndex(e)].saveToStorage(ideasArray);  
+    sortIdeas();
     changeQualityText(e);
-  }
-  if (e.target.id === 'down-arrow' && ideasArray[getIndex(e)].quality > 0){
+  } else if (e.target.id === 'down-arrow' && ideasArray[getIndex(e)].quality > 0){
     ideasArray[getIndex(e)].quality--
     ideasArray[getIndex(e)].saveToStorage(ideasArray);
-    changeQualityText(e);  
+    sortIdeas();
+    changeQualityText(e);
   }
 }
 
-function changeQualityText(e){
-  console.log(e.target.parentNode.childNodes)
-  e.target.parentNode.childNodes[3].innerText = qualitiesArray[ideasArray[getIndex(e)].quality];
-}
+function changeQualityText(e) {
+  var qualityText = [
+    'Quality: Swill',
+    'Quality: Plausible',
+    'Quality: Genius'
+  ];
+  e.target.parentNode.childNodes[3].innerText = qualityText[ideasArray[getIndex(e)].quality];
+};
 
 function getIdentifier(e) {
   return e.target.closest("article").dataset.identifier;
@@ -208,29 +212,29 @@ function favoriteIdea(e) {
 
 function saveStar(e) {
   if (e.target.closest("#star-img")) {
-    var index = getIndex(e);
-    ideasArray[index].star = !ideasArray[index].star;
-    ideasArray[index].saveToStorage(ideasArray);
+    ideasArray[getIndex(e)].star = !ideasArray[index].star;
+    ideasArray[getIndex(e)].saveToStorage(ideasArray);
+    sortIdeas();
     favoriteIdea(e);
   };
 };
 
-function compareArray(array1, array2) {
-  // console.log('hi');
-  clearIdeaBoard();
-  var searchArray = [];
-  array1.forEach(function(ideaObj) {
-    if (array2.includes(ideaObj)) {
-      searchArray.push(ideaObj);
-      displayIdea(ideaObj);
-    }
-  })
-  // console.log(searchArray)
-  return searchArray
-}
+// function compareArray(array1, array2) {
+//   console.log('hi');
+//   clearIdeaBoard();
+//   var searchArray = [];
+//   array1.forEach(function(ideaObj) {
+//     if (array2.includes(ideaObj)) {
+//       searchArray.push(ideaObj);
+//       displayIdea(ideaObj);
+//     }
+//   })
+//   console.log(searchArray)
+//   return searchArray
+// }
 
-function filterBySearch(array) { 
-  return array.filter(function(idObj) {
+function filterBySearch() { 
+  return ideasrray.filter(function(idObj) {
     return idObj.body.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase()) 
      || idObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase());
   });
@@ -249,86 +253,70 @@ function repopulateMain() {
   };
 };
 
-var navListener = document.querySelector("nav");
-navListener.addEventListener('click', filterStar)
+
+// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
 
 function filterStar(e) {
   var favIdeas = [];
-  if (e.target.id === 'show-star-btn'){
-    if (e.target.classList.contains('nav__button') && e.target.classList.contains('active')) {
-      e.target.classList.remove('active')
-      e.target.innerHTML = 'Show Stared Ideas';
-      clearIdeaBoard();
-      persistOnLoad();
-      } else {
-      e.target.innerHTML = 'View All Ideas';
-      e.target.classList.add('active');  
-      ideasArray.filter(function(ideaObj) {
-        if (ideaObj.star === true) {
-          favIdeas.push(ideaObj);
-        }
-      })
-      compareArray(favIdeas, ideasArray);
-      return favIdeas
-    } 
-  }
-}
+  if (e.target.closest('#show-star-btn')) {
+    ideasArray.filter(function(ideaObj) {
+      if (ideaObj.star === true) {
+        favIdeas.push(ideaObj)
+      };
+      compareArray(favIdeas, filterQuality())
+    });
+    return favIdeas;
+  };
+};
 
-function injectIntro(){
+function sortIdeas() {
+  ideasArray.forEach(function(ideaObj) {
+    qualitiesArray[ideaObj.quality].push(ideaObj)
+  });
+};
+
+var navListener = document.querySelector('nav');
+navListener.addEventListener('click', filterStar);
+
+function injectIntro() {
   if (ideaBoard.innerHTML === '' || ideaBoard.innerHTML === ' '){
    clearIdeaBoard()
    ideaBoard.insertAdjacentHTML("afterbegin", 
     ` <card id="js-card">
         <p>Add your wonderful ideas.  Fill out the form and click "Save"</p>
       </card>`)
-  } 
-}
+  }; 
+};
 
-function removeIntro(){
+function removeIntro() {
   var element = document.getElementById('js-card');
-  if (element){
+  if (element) {
   element.parentNode.removeChild(element);
-  }  
-}
+  };  
+};
 
-navListener.addEventListener('click', showMoreLess)
+navListener.addEventListener('click', showMoreLess);
 
 //need to refactor so opposite functions.
 
-function showMoreLess (e) { 
+function showMoreLess(e) { 
   if (e.target.id === 'more-less-btn'){
     if (e.target.classList.contains('nav__button') && e.target.classList.contains('active')) {
-      console.log('active');
-      e.target.classList.remove('active')
-      // e.target.innerHTML = 'Show Less';
-      // clearIdeaBoard();
-      // persistOnLoad();
+      e.target.classList.remove('active');
       var lessIdeas = [];
       for (var i = 0; i < 10; i++){
-        lessIdeas.unshift(ideasArray[ideasArray.length - 1 -i])
+        lessIdeas.unshift(ideasArray[ideasArray.length - 1 -i]);
       }; 
       clearIdeaBoard()
       lessIdeas.forEach(function(idea) {
       displayIdea(idea);
-      })
+      });
     } else {
-      console.log('else')
       e.target.innerHTML = 'Show More';
       e.target.classList.add('active');
-      // var lessIdeas = [];
-      // for (var i = 0; i < 10; i++){
-      //   lessIdeas.unshift(ideasArray[ideasArray.length - 1 -i])
-      // }; 
-      // clearIdeaBoard()
-      // lessIdeas.forEach(function(idea) {
-      // displayIdea(idea);
-      // })
       e.target.innerHTML = 'Show Less';
       clearIdeaBoard();
       persistOnLoad();
-    } 
-  }
-}
-
-
-
+    };
+  };
+};
