@@ -18,17 +18,20 @@ ideaInputs.addEventListener("click", runAll);
 
 startOnLoad();
 persistOnLoad();
+showTenOnLoad();
 injectIntro(); 
 
 function showTenOnLoad() {
-  var recentTenIdeas = [];
-  for (var i = 0; i < 10; i++){
-    recentTenIdeas.unshift(ideasArray[ideasArray.length - 1 -i])
-  }; 
-  clearIdeaBoard()
-  recentTenIdeas.forEach(function(idea) {
-  displayIdea(idea);
-  });
+  if (ideasArray.length > 10){
+    var recentTenIdeas = [];
+    for (var i = 0; i < 10; i++){
+      recentTenIdeas.unshift(ideasArray[ideasArray.length - 1 -i])
+    }; 
+    clearIdeaBoard()
+    recentTenIdeas.forEach(function(idea) {
+    displayIdea(idea);
+    });
+  };
 };
 
 function startOnLoad() {
@@ -37,7 +40,6 @@ function startOnLoad() {
   } else {
     ideasArray = JSON.parse(localStorage.getItem('array')).map(element => new Idea(element));
     sortIdeas();
-    showTenOnLoad();
   };
 };
 
@@ -110,12 +112,16 @@ function persistOnLoad() {
  };
 
 function navEventHandler(e) {
+  if (e.target.closest('.js-switch')) {  
     var nodesIndexList = document.querySelectorAll('.js-switch')
     nodesIndexList.forEach(function(index){
       index.classList.add('swill-quality');
       index.classList.remove('swill-quality-active');
     });
     e.target.closest('.js-switch').classList.add('swill-quality-active'); 
+  }
+
+
   if (e.target.closest('#menu-button')) {
     console.log('hamburger')
     if (e.target.src === "images/menu.svg") {
@@ -311,8 +317,8 @@ function showMoreLess(e) {
       lessIdeas.forEach(function(idea) {
       displayIdea(idea);
       });
-    } else {
       e.target.innerHTML = 'Show More';
+    } else {
       e.target.classList.add('active');
       e.target.innerHTML = 'Show Less';
       clearIdeaBoard();
