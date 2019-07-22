@@ -32,6 +32,10 @@ nav {
   flex-direction: column;
 }
 
+nav img {
+  display: none;
+}
+
 nav h1 {
   font-size: 1.25em;
   font-weight: 700;
@@ -199,18 +203,21 @@ section div input {
 }
 
 main {
-  grid-area: main;
   background-color: #eaeaf4;
-  padding: 20px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-area: main;
   grid-gap: 10% 2%;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  padding: 20px;
 }
 
 article {
   height: fit-content;
   background-color: white;
   border: 2px solid #1F1F3D;
+  max-width: 350px;
+  margin: auto;
 }
 
 article header {
@@ -257,8 +264,6 @@ article footer p {
   margin: 0;
 }
 
-
-
 card {
   display: flex;
   justify-content: center;
@@ -271,10 +276,126 @@ card {
   align-self: center;
   justify-self: center;
   background-color: ##eaeaf4;
-
 }
 
 card p {
   width:200px;
   background-color: ##eaeaf4
 }
+
+@media screen and (max-width: 900px) {
+  body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 8vh 50vh auto;
+    grid-template-areas: 
+        'nav'
+        'section'
+        'main';
+  }
+
+  nav {
+    align-items: center;
+    flex-direction: row;
+    height: 8vh;
+    justify-content: flex-start;
+    position: fixed;
+    width: 100%;
+  }
+
+  nav img {
+    display: inline-block;
+    height: 50px;
+    position: fixed;
+    width: 50px;
+  }
+
+  nav h1 {
+    align-self: center;
+    display: inline-block;
+    margin: auto;
+    padding: 0;
+    width: auto;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  section {
+    padding: 10px 20%;
+  }
+
+  section form {
+    max-width: 500px;
+    min-width: 400px;
+  }
+
+  main {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  article {
+    max-width: 350px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 8vh 50vh auto;
+    grid-template-areas: 
+        'nav'
+        'section'
+        'main';
+  }
+
+  nav {
+    align-items: center;
+    flex-direction: row;
+    height: 8vh;
+    justify-content: flex-start;
+    position: fixed;
+    width: 100%;
+  }
+
+  nav img {
+    display: inline-block;
+    height: 50px;
+    position: fixed;
+    width: 50px;
+  }
+
+  nav h1 {
+    align-self: center;
+    display: inline-block;
+    margin: auto;
+    padding: 0;
+    width: auto;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  section {
+    padding: 10px 5%;
+  }
+
+  main {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 2% 2%;
+    padding: 10px 5%;
+  }
+
+  article {
+    max-width: none;
+    width: 100%;
+  }
+}
+
+
+
