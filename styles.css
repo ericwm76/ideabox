@@ -194,14 +194,13 @@ section div input {
 }
 
 main {
-  grid-area: main;
   background-color: #eaeaf4;
-  padding: 20px;
   display: grid;
-  /*grid-template-columns: repeat(3, 1fr);*/
+  grid-area: main;
   grid-gap: 10% 2%;
-    /*display: grid;*/
-    grid-template-columns: repeat(auto-fit, minmax(min-content, 400px))
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  padding: 20px;
 }
 
 article {
@@ -209,6 +208,7 @@ article {
   background-color: white;
   border: 2px solid #1F1F3D;
   max-width: 250px;
+  margin: auto;
 }
 
 article header {
@@ -255,8 +255,6 @@ article footer p {
   margin: 0;
 }
 
-
-
 card {
   display: flex;
   justify-content: center;
@@ -269,7 +267,6 @@ card {
   align-self: center;
   justify-self: center;
   background-color: ##eaeaf4;
-
 }
 
 card p {
@@ -289,17 +286,21 @@ card p {
   }
 
   section {
-    padding: 10px auto;
+    padding: 10px 20%;
   }
 
   section form {
     max-width: 500px;
-    min-width: 350px;
+    min-width: 400px;
   }
 
   main {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min-content, 400px))
+    /*grid-template-columns: repeat(autofit, minmax(200px, 1fr));*/
+    grid-template-columns: 1fr 1fr;
+  }
+
+  article {
+    max-width: 350px;
   }
 }
 
@@ -323,12 +324,12 @@ card p {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 2% 2%;
-    justify-content: 
-
-}
+    padding: 10px 5%;
+  }
 
   article {
-    grid-column: 
+    max-width: none;
+    width: 100%;
   }
 }
 
