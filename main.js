@@ -7,6 +7,7 @@ var titleInput = document.querySelector('#title-input');
 var bodyInput = document.querySelector('#idea-body');
 var saveBtn = document.querySelector('#save-btn');
 
+
 document.querySelector('nav').addEventListener('click', navEventHandler);
 ideaBoard.addEventListener('click', updateArticle);
 ideaBoard.addEventListener('focusout', saveCard);
@@ -16,7 +17,7 @@ ideaInputs.addEventListener('keyup', disableSave);
 ideaInputs.addEventListener("click", runAll);
 
 startOnLoad();
-persistOnLoad(ideaInputs);
+persistOnLoad();
 
 function startOnLoad() {
   if (JSON.parse(localStorage.getItem('array')) === null) {
@@ -189,8 +190,22 @@ function saveStar(e) {
   };
 };
 
-function filterBySearch() { 
-  return ideasArray.filter(function(idObj) {
+function compareArray(array1, array2) {
+  console.log('hi');
+  clearIdeaBoard();
+  var searchArray = [];
+  array1.forEach(function(ideaObj) {
+    if (array2.includes(ideaObj)) {
+      searchArray.push(ideaObj);
+      displayIdea(ideaObj);
+    }
+  })
+  console.log(searchArray)
+  return searchArray
+}
+
+function filterBySearch(array) { 
+  return array.filter(function(idObj) {
     return idObj.body.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase()) 
      || idObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase());
   });
@@ -208,3 +223,32 @@ function repopulateMain() {
     persistOnLoad();
   };
 };
+
+var navListener = document.querySelector("nav");navListener.addEventListener('click', filterQuality)
+
+function filterStar(e) {
+  var favIdeas = [];
+  if (e.target.closest('#show-star-btn')) {
+    ideasArray.filter(function(ideaObj) {
+      if (ideaObj.star === true) {
+        favIdeas.push(ideaObj)
+      }
+      compareArray(favIdeas, ideasArray)
+    })
+    // console.log(favIdeas)
+    return favIdeas
+  }
+}
+
+function filterQuality(e) {
+  var qualityIdeas = [];
+  if (e.target.closest('#js-switch')) {
+    var qualArray = ideasArray.filter(function(ideaObj) {
+      ideaObj.quality === 1;
+      console.log(ideaObj.quality);
+    })
+  }
+  console.log(qualArray)
+  return qualArray
+}
+
