@@ -18,6 +18,7 @@ ideaInputs.addEventListener("click", runAll);
 
 startOnLoad();
 persistOnLoad();
+injectIntro(); 
 
 function startOnLoad() {
   if (JSON.parse(localStorage.getItem('array')) === null) {
@@ -81,6 +82,7 @@ function createObj() {
   var newIdea = new Idea({title: titleInput.value, body: bodyInput.value, star: false, quality: 0, id: Date.now()});
   ideasArray.push(newIdea);
   newIdea.saveToStorage(ideasArray);
+  removeIntro()
   displayIdea(newIdea);
 };
 
@@ -166,6 +168,7 @@ function findIdeaToRemove(e) {
   if (e.target.closest('#delete-x')) {
     e.target.closest('article').remove();
     ideasArray[getIndex(e)].deleteFromStorage(getIdentifier(e));
+    injectIntro();
   };
 };
 
@@ -247,3 +250,46 @@ function filterStar(e) {
     } 
   }
 }
+
+function injectIntro(){
+  if (ideaBoard.innerHTML === '' || ideaBoard.innerHTML === ' '){
+   clearIdeaBoard()
+   ideaBoard.insertAdjacentHTML("afterbegin", 
+    ` <card id="js-card">
+        <p>Add your wonderful ideas.  Fill out the form and click "Save"</p>
+      </card>`)
+  } 
+}
+
+function removeIntro(){
+  var element = document.getElementById('js-card');
+  if (element){
+  element.parentNode.removeChild(element);
+  }  
+}
+navListener.addEventListener('click', showMoreLess)
+
+function showMoreLess (e) { 
+  if (e.target.id === 'more-less-btn'){
+    if (e.target.classList.contains('nav__button') && e.target.classList.contains('active')) {
+      console.log('active');
+      e.target.classList.remove('active')
+      e.target.innerHTML = 'Show Less';
+      clearIdeaBoard();
+      persistOnLoad();
+    } else {
+      console.log('else')
+      e.target.innerHTML = 'Show More';
+      e.target.classList.add('active');
+      var lessIdeas = [];
+      for (var i = 0; i < 10; i++){
+        lessIdeas.push(ideasArray[i])
+      }; 
+      clearIdeaBoard()
+      lessIdeas.forEach(function(idea) {
+      displayIdea(idea);
+      })
+    } 
+  }
+}
+
