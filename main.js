@@ -18,7 +18,19 @@ ideaInputs.addEventListener("click", runAll);
 
 startOnLoad();
 persistOnLoad();
+showTenOnLoad()
 injectIntro(); 
+
+function showTenOnLoad() {
+  var recentTenIdeas = [];
+  for (var i = 0; i < 10; i++){
+    recentTenIdeas.unshift(ideasArray[ideasArray.length - 1 -i])
+  }; 
+  clearIdeaBoard()
+  recentTenIdeas.forEach(function(idea) {
+  displayIdea(idea);
+  });
+};
 
 function startOnLoad() {
   if (JSON.parse(localStorage.getItem('array')) === null) {
@@ -151,6 +163,7 @@ function changeQuality(e){
 }
 
 function changeQualityText(e){
+  console.log(e.target.parentNode.childNodes)
   e.target.parentNode.childNodes[3].innerText = qualitiesArray[ideasArray[getIndex(e)].quality];
 }
 
@@ -267,29 +280,45 @@ function removeIntro(){
   element.parentNode.removeChild(element);
   }  
 }
+
 navListener.addEventListener('click', showMoreLess)
+
+//need to refactor so opposite functions.
 
 function showMoreLess (e) { 
   if (e.target.id === 'more-less-btn'){
     if (e.target.classList.contains('nav__button') && e.target.classList.contains('active')) {
       console.log('active');
       e.target.classList.remove('active')
-      e.target.innerHTML = 'Show Less';
-      clearIdeaBoard();
-      persistOnLoad();
-    } else {
-      console.log('else')
-      e.target.innerHTML = 'Show More';
-      e.target.classList.add('active');
+      // e.target.innerHTML = 'Show Less';
+      // clearIdeaBoard();
+      // persistOnLoad();
       var lessIdeas = [];
       for (var i = 0; i < 10; i++){
-        lessIdeas.push(ideasArray[i])
+        lessIdeas.unshift(ideasArray[ideasArray.length - 1 -i])
       }; 
       clearIdeaBoard()
       lessIdeas.forEach(function(idea) {
       displayIdea(idea);
       })
+    } else {
+      console.log('else')
+      e.target.innerHTML = 'Show More';
+      e.target.classList.add('active');
+      // var lessIdeas = [];
+      // for (var i = 0; i < 10; i++){
+      //   lessIdeas.unshift(ideasArray[ideasArray.length - 1 -i])
+      // }; 
+      // clearIdeaBoard()
+      // lessIdeas.forEach(function(idea) {
+      // displayIdea(idea);
+      // })
+      e.target.innerHTML = 'Show Less';
+      clearIdeaBoard();
+      persistOnLoad();
     } 
   }
 }
+
+
 
