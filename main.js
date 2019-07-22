@@ -18,6 +18,18 @@ ideaInputs.addEventListener("click", runAll);
 
 startOnLoad();
 persistOnLoad();
+injectIntro(); 
+
+function showTenOnLoad() {
+  var recentTenIdeas = [];
+  for (var i = 0; i < 10; i++){
+    recentTenIdeas.unshift(ideasArray[ideasArray.length - 1 -i])
+  }; 
+  clearIdeaBoard()
+  recentTenIdeas.forEach(function(idea) {
+  displayIdea(idea);
+  });
+};
 
 function startOnLoad() {
   if (JSON.parse(localStorage.getItem('array')) === null) {
@@ -25,6 +37,7 @@ function startOnLoad() {
   } else {
     ideasArray = JSON.parse(localStorage.getItem('array')).map(element => new Idea(element));
     sortIdeas();
+    showTenOnLoad();
   };
 };
 
@@ -86,6 +99,7 @@ function createObj() {
   ideasArray.push(newIdea);
   newIdea.saveToStorage(ideasArray);
   sortIdeas();
+  removeIntro();
   displayIdea(newIdea);
 };
 
@@ -102,8 +116,7 @@ function navEventHandler(e) {
       index.classList.remove('swill-quality-active');
     })
     e.target.closest('.js-switch').classList.add('swill-quality-active'); 
-  }
-
+  };
 
 function updateArticle(e) {
   e.preventDefault();
@@ -149,14 +162,14 @@ function changeQuality(e){
   }
 }
 
-function changeQualityText(e){
+function changeQualityText(e) {
   var qualityText = [
-    "Quality: Swill",
-    "Quality: Plausible",
-    "Quality: Genius"
+    'Quality: Swill',
+    'Quality: Plausible',
+    'Quality: Genius'
   ];
   e.target.parentNode.childNodes[3].innerText = qualityText[ideasArray[getIndex(e)].quality];
-}
+};
 
 function getIdentifier(e) {
   return e.target.closest("article").dataset.identifier;
@@ -172,6 +185,7 @@ function findIdeaToRemove(e) {
   if (e.target.closest('#delete-x')) {
     e.target.closest('article').remove();
     ideasArray[getIndex(e)].deleteFromStorage(getIdentifier(e));
+    injectIntro();
   };
 };
 
@@ -229,9 +243,8 @@ function repopulateMain() {
   };
 };
 
-// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
 
-var navListener = document.querySelector("nav");navListener.addEventListener('click', filterStar)
+// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
 
 function filterStar(e) {
   var favIdeas = [];
@@ -250,5 +263,50 @@ function sortIdeas() {
   ideasArray.forEach(function(ideaObj) {
     qualitiesArray[ideaObj.quality].push(ideaObj)
   })
+};
+
+var navListener = document.querySelector('nav');
+navListener.addEventListener('click', filterStar);
+
+function injectIntro(){
+  if (ideaBoard.innerHTML === '' || ideaBoard.innerHTML === ' '){
+   clearIdeaBoard()
+   ideaBoard.insertAdjacentHTML("afterbegin", 
+    ` <card id="js-card">
+        <p>Add your wonderful ideas.  Fill out the form and click "Save"</p>
+      </card>`)
+  } 
 }
 
+function removeIntro(){
+  var element = document.getElementById('js-card');
+  if (element){
+  element.parentNode.removeChild(element);
+  }  
+}
+
+navListener.addEventListener('click', showMoreLess)
+
+//need to refactor so opposite functions.
+
+function showMoreLess (e) { 
+  if (e.target.id === 'more-less-btn'){
+    if (e.target.classList.contains('nav__button') && e.target.classList.contains('active')) {
+      e.target.classList.remove('active');
+      var lessIdeas = [];
+      for (var i = 0; i < 10; i++){
+        lessIdeas.unshift(ideasArray[ideasArray.length - 1 -i])
+      }; 
+      clearIdeaBoard()
+      lessIdeas.forEach(function(idea) {
+      displayIdea(idea);
+      })
+    } else {
+      e.target.innerHTML = 'Show More';
+      e.target.classList.add('active');
+      e.target.innerHTML = 'Show Less';
+      clearIdeaBoard();
+      persistOnLoad();
+    } 
+  }
+}

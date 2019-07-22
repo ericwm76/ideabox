@@ -14,7 +14,7 @@ body {
   'nav main main main';
   font-family: 'Open Sans', sans-serif;
   height: 100vh;
-  background-color:  #eaeaf4
+  background-color: #eaeaf4;
 }
 
 img {
@@ -30,6 +30,10 @@ nav {
   color: white;
   display: flex;
   flex-direction: column;
+}
+
+nav img {
+  display: none;
 }
 
 nav h1 {
@@ -52,6 +56,11 @@ nav h6 {
     padding-top: 20px;
 }
 
+.active{
+  background-color: #D12119;
+  border: 1px solid #F58E72;
+}
+
 nav button{
   background-color: #5356A4;
   color: #E9E9F3;
@@ -60,6 +69,7 @@ nav button{
   margin: 10px 15px 25px;
   font-size: 1.25em;
   font-weight: 700;
+  display: block;
 }
 
 /* middle 3 buttons */
@@ -75,6 +85,7 @@ nav button{
   text-align: left;
   font-size: 1.2em;
   font-weight: 400;
+  width: 100%;
 }
 /*not a hover this is the selected state */
 .swill-quality-active {
@@ -89,20 +100,22 @@ nav button{
   text-align: left;
   font-size: 1.2em;
   font-weight: 400;
+  width: 100%;
 }
- #quality-btn {
-  margin-left: 0px;
-  width:100%;
+
+ #quality-btn, #show-star-btn, #more-less-btn {
+  /*margin-left: 0px;*/
+  width: 90%;
   border-radius: 3px;
  }
 
-#show-star-btn {
-  border-radius: 3px;
-}
-
+ #show-star-btn, #more-less-btn {
+  margin: 10px 15px 25px 15px;
+  width: 90%;
+ }
 
 nav form {
-  padding:0px 15px;
+  /*padding:0px 15px;*/
   border-bottom: 3px solid #353567;
 }
 
@@ -111,13 +124,14 @@ nav form label {
   font-size: .95em;
   display: block;
   font-weight: 700;
-  margin: 15px 0px 7px;
+  margin: 15px 15px 7px 15px;
 }
 nav form input {
   color: #5356A4;
-  width: 100%;
+  width: 90%;
   height:45px;
-  margin-bottom: 20px;
+  margin: 15px 15px 20px 15px;
+  /*margin-bottom: 20px;*/
 }
 
 section {
@@ -194,18 +208,21 @@ section div input {
 }
 
 main {
-  grid-area: main;
   background-color: #eaeaf4;
-  padding: 20px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-area: main;
   grid-gap: 10% 2%;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  padding: 20px;
 }
 
 article {
   height: fit-content;
   background-color: white;
   border: 2px solid #1F1F3D;
+  max-width: 350px;
+  margin: auto;
 }
 
 article header {
@@ -223,19 +240,23 @@ article div {
 }
 
 article p {
-  margin: 8px 12px;
+  padding: 8px 12px;
 }
 
 .article__title {
   font-weight: 700;
   margin-top: 20px;
   font-size: 1.2em;
+
 }
 
 .article__body {
   margin-bottom: 24px;
   font-size: 1.2em;
   line-height: 1.4em;
+  width: 100%;
+  min-height: 120px;
+  max-height: 120px;
 }
 
 article footer {
@@ -252,8 +273,6 @@ article footer p {
   margin: 0;
 }
 
-
-
 card {
   display: flex;
   justify-content: center;
@@ -266,10 +285,126 @@ card {
   align-self: center;
   justify-self: center;
   background-color: ##eaeaf4;
-
 }
 
 card p {
   width:200px;
   background-color: ##eaeaf4
 }
+
+@media screen and (max-width: 900px) {
+  body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 8vh 50vh auto;
+    grid-template-areas: 
+        'nav'
+        'section'
+        'main';
+  }
+
+  nav {
+    align-items: center;
+    flex-direction: row;
+    height: 8vh;
+    justify-content: flex-start;
+    position: fixed;
+    width: 100%;
+  }
+
+  nav img {
+    display: inline-block;
+    height: 50px;
+    position: fixed;
+    width: 50px;
+  }
+
+  nav h1 {
+    align-self: center;
+    display: inline-block;
+    margin: auto;
+    padding: 0;
+    width: auto;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  section {
+    padding: 10px 20%;
+  }
+
+  section form {
+    max-width: 500px;
+    min-width: 400px;
+  }
+
+  main {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  article {
+    max-width: 350px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 8vh 50vh auto;
+    grid-template-areas: 
+        'nav'
+        'section'
+        'main';
+  }
+
+  nav {
+    align-items: center;
+    flex-direction: row;
+    height: 8vh;
+    justify-content: flex-start;
+    position: fixed;
+    width: 100%;
+  }
+
+  nav img {
+    display: inline-block;
+    height: 50px;
+    position: fixed;
+    width: 50px;
+  }
+
+  nav h1 {
+    align-self: center;
+    display: inline-block;
+    margin: auto;
+    padding: 0;
+    width: auto;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  section {
+    padding: 10px 5%;
+  }
+
+  main {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 2% 2%;
+    padding: 10px 5%;
+  }
+
+  article {
+    max-width: none;
+    width: 100%;
+  }
+}
+
+
+
