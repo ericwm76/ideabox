@@ -114,9 +114,19 @@ function navEventHandler(e) {
     nodesIndexList.forEach(function(index){
       index.classList.add('swill-quality');
       index.classList.remove('swill-quality-active');
-    })
+    });
     e.target.closest('.js-switch').classList.add('swill-quality-active'); 
-  };
+  if (e.target.closest('#menu-button')) {
+    console.log('hamburger')
+    if (e.target.src === "images/menu.svg") {
+    document.querySelector('#menu-active').classList.remove('menu');
+    e.target.src = 'images/menu-close.svg';
+    } else {
+    document.querySelector('#menu-active').classList.add('menu');
+    e.target.src = 'images/menu.svg';
+    };
+  };  
+};
 
 function updateArticle(e) {
   e.preventDefault();
@@ -252,61 +262,61 @@ function filterStar(e) {
     ideasArray.filter(function(ideaObj) {
       if (ideaObj.star === true) {
         favIdeas.push(ideaObj)
-      }
+      };
       compareArray(favIdeas, filterQuality())
-    })
-    return favIdeas
-  }
-}
+    });
+    return favIdeas;
+  };
+};
 
 function sortIdeas() {
   ideasArray.forEach(function(ideaObj) {
     qualitiesArray[ideaObj.quality].push(ideaObj)
-  })
+  });
 };
 
 var navListener = document.querySelector('nav');
 navListener.addEventListener('click', filterStar);
 
-function injectIntro(){
+function injectIntro() {
   if (ideaBoard.innerHTML === '' || ideaBoard.innerHTML === ' '){
    clearIdeaBoard()
    ideaBoard.insertAdjacentHTML("afterbegin", 
     ` <card id="js-card">
         <p>Add your wonderful ideas.  Fill out the form and click "Save"</p>
       </card>`)
-  } 
-}
+  }; 
+};
 
-function removeIntro(){
+function removeIntro() {
   var element = document.getElementById('js-card');
-  if (element){
+  if (element) {
   element.parentNode.removeChild(element);
-  }  
-}
+  };  
+};
 
-navListener.addEventListener('click', showMoreLess)
+navListener.addEventListener('click', showMoreLess);
 
 //need to refactor so opposite functions.
 
-function showMoreLess (e) { 
+function showMoreLess(e) { 
   if (e.target.id === 'more-less-btn'){
     if (e.target.classList.contains('nav__button') && e.target.classList.contains('active')) {
       e.target.classList.remove('active');
       var lessIdeas = [];
       for (var i = 0; i < 10; i++){
-        lessIdeas.unshift(ideasArray[ideasArray.length - 1 -i])
+        lessIdeas.unshift(ideasArray[ideasArray.length - 1 -i]);
       }; 
       clearIdeaBoard()
       lessIdeas.forEach(function(idea) {
       displayIdea(idea);
-      })
+      });
     } else {
       e.target.innerHTML = 'Show More';
       e.target.classList.add('active');
       e.target.innerHTML = 'Show Less';
       clearIdeaBoard();
       persistOnLoad();
-    } 
-  }
-}
+    };
+  };
+};
