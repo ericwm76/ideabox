@@ -7,6 +7,7 @@ var titleInput = document.querySelector('#title-input');
 var bodyInput = document.querySelector('#idea-body');
 var saveBtn = document.querySelector('#save-btn');
 
+
 document.querySelector('nav').addEventListener('click', navEventHandler);
 ideaBoard.addEventListener('click', updateArticle);
 ideaBoard.addEventListener('focusout', saveCard);
@@ -16,7 +17,20 @@ ideaInputs.addEventListener('keyup', disableSave);
 ideaInputs.addEventListener("click", runAll);
 
 startOnLoad();
-persistOnLoad(ideaInputs);
+persistOnLoad();
+showTenOnLoad()
+injectIntro(); 
+
+function showTenOnLoad() {
+  var recentTenIdeas = [];
+  for (var i = 0; i < 10; i++){
+    recentTenIdeas.unshift(ideasArray[ideasArray.length - 1 -i])
+  }; 
+  clearIdeaBoard()
+  recentTenIdeas.forEach(function(idea) {
+  displayIdea(idea);
+  });
+};
 
 function startOnLoad() {
   if (JSON.parse(localStorage.getItem('array')) === null) {
@@ -80,6 +94,7 @@ function createObj() {
   var newIdea = new Idea({title: titleInput.value, body: bodyInput.value, star: false, quality: 0, id: Date.now()});
   ideasArray.push(newIdea);
   newIdea.saveToStorage(ideasArray);
+  removeIntro()
   displayIdea(newIdea);
 };
 
@@ -90,21 +105,20 @@ function persistOnLoad() {
  };
 
 function navEventHandler(e) {
-//do we want to go get the node list or just set it to [9, 11,13]?
-  var nodesIndexList = [];
-  var pCNodes = e.target.parentNode.childNodes;
-  for (var i = 0 ; i < pCNodes.length; i++){
-    if (pCNodes[i].id === 'js-switch'){
-      nodesIndexList.push(i)
-    }
-  }
-
-  nodesIndexList.forEach(function(index){
-    pCNodes[index].classList.add('swill-quality');
-    pCNodes[index].classList.remove('swill-quality-active');
-  })
-
-  e.target.closest('.nav__button').classList.add('swill-quality-active'); 
+  if( e.target.closest('#js-switch')){
+    var nodesIndexList = [];
+    var pCNodes = e.target.parentNode.childNodes;
+    for (var i = 0 ; i < pCNodes.length; i++){
+      if (pCNodes[i].id === 'js-switch'){
+        nodesIndexList.push(i)
+      };
+    };
+    nodesIndexList.forEach(function(index){
+      pCNodes[index].classList.add('swill-quality');
+      pCNodes[index].classList.remove('swill-quality-active');
+    });
+    e.target.closest('#js-switch').classList.add('swill-quality-active');
+  }; 
 };
 
 function updateArticle(e) {
@@ -149,6 +163,7 @@ function changeQuality(e){
 }
 
 function changeQualityText(e){
+  console.log(e.target.parentNode.childNodes)
   e.target.parentNode.childNodes[3].innerText = qualitiesArray[ideasArray[getIndex(e)].quality];
 }
 
@@ -166,6 +181,7 @@ function findIdeaToRemove(e) {
   if (e.target.closest('#delete-x')) {
     e.target.closest('article').remove();
     ideasArray[getIndex(e)].deleteFromStorage(getIdentifier(e));
+    injectIntro();
   };
 };
 
@@ -189,8 +205,22 @@ function saveStar(e) {
   };
 };
 
-function filterBySearch() { 
-  return ideasArray.filter(function(idObj) {
+function compareArray(array1, array2) {
+  // console.log('hi');
+  clearIdeaBoard();
+  var searchArray = [];
+  array1.forEach(function(ideaObj) {
+    if (array2.includes(ideaObj)) {
+      searchArray.push(ideaObj);
+      displayIdea(ideaObj);
+    }
+  })
+  // console.log(searchArray)
+  return searchArray
+}
+
+function filterBySearch(array) { 
+  return array.filter(function(idObj) {
     return idObj.body.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase()) 
      || idObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase());
   });
@@ -208,3 +238,87 @@ function repopulateMain() {
     persistOnLoad();
   };
 };
+
+var navListener = document.querySelector("nav");
+navListener.addEventListener('click', filterStar)
+
+function filterStar(e) {
+  var favIdeas = [];
+  if (e.target.id === 'show-star-btn'){
+    if (e.target.classList.contains('nav__button') && e.target.classList.contains('active')) {
+      e.target.classList.remove('active')
+      e.target.innerHTML = 'Show Stared Ideas';
+      clearIdeaBoard();
+      persistOnLoad();
+      } else {
+      e.target.innerHTML = 'View All Ideas';
+      e.target.classList.add('active');  
+      ideasArray.filter(function(ideaObj) {
+        if (ideaObj.star === true) {
+          favIdeas.push(ideaObj);
+        }
+      })
+      compareArray(favIdeas, ideasArray);
+      return favIdeas
+    } 
+  }
+}
+
+function injectIntro(){
+  if (ideaBoard.innerHTML === '' || ideaBoard.innerHTML === ' '){
+   clearIdeaBoard()
+   ideaBoard.insertAdjacentHTML("afterbegin", 
+    ` <card id="js-card">
+        <p>Add your wonderful ideas.  Fill out the form and click "Save"</p>
+      </card>`)
+  } 
+}
+
+function removeIntro(){
+  var element = document.getElementById('js-card');
+  if (element){
+  element.parentNode.removeChild(element);
+  }  
+}
+
+navListener.addEventListener('click', showMoreLess)
+
+//need to refactor so opposite functions.
+
+function showMoreLess (e) { 
+  if (e.target.id === 'more-less-btn'){
+    if (e.target.classList.contains('nav__button') && e.target.classList.contains('active')) {
+      console.log('active');
+      e.target.classList.remove('active')
+      // e.target.innerHTML = 'Show Less';
+      // clearIdeaBoard();
+      // persistOnLoad();
+      var lessIdeas = [];
+      for (var i = 0; i < 10; i++){
+        lessIdeas.unshift(ideasArray[ideasArray.length - 1 -i])
+      }; 
+      clearIdeaBoard()
+      lessIdeas.forEach(function(idea) {
+      displayIdea(idea);
+      })
+    } else {
+      console.log('else')
+      e.target.innerHTML = 'Show More';
+      e.target.classList.add('active');
+      // var lessIdeas = [];
+      // for (var i = 0; i < 10; i++){
+      //   lessIdeas.unshift(ideasArray[ideasArray.length - 1 -i])
+      // }; 
+      // clearIdeaBoard()
+      // lessIdeas.forEach(function(idea) {
+      // displayIdea(idea);
+      // })
+      e.target.innerHTML = 'Show Less';
+      clearIdeaBoard();
+      persistOnLoad();
+    } 
+  }
+}
+
+
+
