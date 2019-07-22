@@ -240,15 +240,11 @@ function filterStar(e) {
   }
 }
 
-function filterQuality(e) {
-  var qualityIdeas = [];
+function filterQuality(e, num) {
   if (e.target.closest('#js-switch')) {
-    var qualArray = ideasArray.filter(function(ideaObj) {
-      ideaObj.quality === 1;
-      console.log(ideaObj.quality);
-    })
+    return ideasArray.filter(function(ideaObj) {
+      return ideaObj.quality === num;
+    });
   }
-  console.log(qualArray)
-  return qualArray
 }
 
