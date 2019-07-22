@@ -18,7 +18,7 @@ ideaInputs.addEventListener("click", runAll);
 
 startOnLoad();
 persistOnLoad();
-showTenOnLoad()
+// showTenOnLoad();
 injectIntro(); 
 
 function showTenOnLoad() {
@@ -105,20 +105,30 @@ function persistOnLoad() {
  };
 
 function navEventHandler(e) {
-  if( e.target.closest('#js-switch')){
+  if (e.target.closest('#js-switch')) {
     var nodesIndexList = [];
     var pCNodes = e.target.parentNode.childNodes;
-    for (var i = 0 ; i < pCNodes.length; i++){
-      if (pCNodes[i].id === 'js-switch'){
+    for (var i = 0 ; i < pCNodes.length; i++) {
+      if (pCNodes[i].id === 'js-switch') {
         nodesIndexList.push(i)
       };
     };
-    nodesIndexList.forEach(function(index){
+    nodesIndexList.forEach(function(index) {
       pCNodes[index].classList.add('swill-quality');
       pCNodes[index].classList.remove('swill-quality-active');
     });
     e.target.closest('#js-switch').classList.add('swill-quality-active');
-  }; 
+  } 
+  if (e.target.closest('#menu-button')) {
+    console.log('hamburger')
+    if (e.target.src === "images/menu.svg") {
+    document.querySelector('#menu-active').classList.remove('menu');
+    e.target.src = 'images/menu-close.svg';
+    } else {
+    document.querySelector('#menu-active').classList.add('menu');
+    e.target.src = 'images/menu.svg';
+    };
+  };
 };
 
 function updateArticle(e) {

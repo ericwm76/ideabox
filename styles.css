@@ -331,6 +331,14 @@ card p {
     display: none;
   }
 
+  #menu-active {
+    position: absolute;
+    left: 0;
+    top: 8vh;
+    width: 100%;
+    background-color: #1F1F3D;
+  }
+
   section {
     padding: 10px 20%;
   }
@@ -386,6 +394,14 @@ card p {
 
   .menu {
     display: none;
+  }
+
+  #menu-active {
+    position: absolute;
+    left: 0;
+    top: 8vh;
+    width: 100%;
+    background-color: #1F1F3D;
   }
 
   section {
