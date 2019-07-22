@@ -1,5 +1,5 @@
 var ideasArray = [];
-var qualitiesArray = ['Quality: Swill', 'Quality: Plausible', 'Quality: Genius']
+var qualitiesArray = [[], [], []];
 var navBar = document.querySelector('nav');
 var ideaInputs = document.querySelector('section');
 var ideaBoard = document.querySelector('main');
@@ -24,6 +24,7 @@ function startOnLoad() {
     ideasArray = [];
   } else {
     ideasArray = JSON.parse(localStorage.getItem('array')).map(element => new Idea(element));
+    sortIdeas();
   };
 };
 
@@ -45,7 +46,11 @@ function disableSave() {
 };
 
 function displayIdea(ideaObj) {
-  var qualityText = qualitiesArray[ideaObj.quality]
+  var qualityText = [
+    "Quality: Swill",
+    "Quality: Plausible",
+    "Quality: Genius"
+  ];
   if (ideaObj.star === true) {
     var star = 'images/star-active.svg';
   } else {
@@ -63,7 +68,7 @@ function displayIdea(ideaObj) {
             <p contenteditable= "true" class="article__body">${ideaObj.body}</p>
             <footer class="article__footer">
               <img src="images/upvote.svg" id="up-arrow" alt="arrow pointing up white">
-              <p class="article__quality" id="idea-quality">${qualityText}</span></p>
+              <p class="article__quality" id="idea-quality">${qualityText[ideaObj.quality]}</span></p>
               <img src="images/downvote.svg" id="down-arrow" alt="arrow pointing down white">
           </div>
           </footer>
@@ -80,6 +85,7 @@ function createObj() {
   var newIdea = new Idea({title: titleInput.value, body: bodyInput.value, star: false, quality: 0, id: Date.now()});
   ideasArray.push(newIdea);
   newIdea.saveToStorage(ideasArray);
+  sortIdeas();
   displayIdea(newIdea);
 };
 
@@ -118,12 +124,14 @@ function saveCard(e) {
     var articleTitle = e.target.closest('.article__title').innerText;
     ideasArray[getIndex(e)].title = articleTitle;
     ideasArray[getIndex(e)].saveToStorage(ideasArray);
+    sortIdeas();
   };
 
   if (e.target.closest('.article__body')) {
     var articleBody = e.target.closest('.article__body').innerText;
     ideasArray[getIndex(e)].body = articleBody;
     ideasArray[getIndex(e)].saveToStorage(ideasArray);
+    sortIdeas();
   };
 };
 
@@ -131,17 +139,23 @@ function changeQuality(e){
   if (e.target.id === 'up-arrow' && ideasArray[getIndex(e)].quality < qualitiesArray.length - 1) {
     ideasArray[getIndex(e)].quality++;
     ideasArray[getIndex(e)].saveToStorage(ideasArray);  
+    sortIdeas();
     changeQualityText(e);
-  }
-  if (e.target.id === 'down-arrow' && ideasArray[getIndex(e)].quality > 0){
+  } else if (e.target.id === 'down-arrow' && ideasArray[getIndex(e)].quality > 0){
     ideasArray[getIndex(e)].quality--
     ideasArray[getIndex(e)].saveToStorage(ideasArray);
-    changeQualityText(e);  
+    sortIdeas();
+    changeQualityText(e);
   }
 }
 
 function changeQualityText(e){
-  e.target.parentNode.childNodes[3].innerText = qualitiesArray[ideasArray[getIndex(e)].quality];
+  var qualityText = [
+    "Quality: Swill",
+    "Quality: Plausible",
+    "Quality: Genius"
+  ];
+  e.target.parentNode.childNodes[3].innerText = qualityText[ideasArray[getIndex(e)].quality];
 }
 
 function getIdentifier(e) {
@@ -174,26 +188,26 @@ function favoriteIdea(e) {
 
 function saveStar(e) {
   if (e.target.closest("#star-img")) {
-    var index = getIndex(e);
-    ideasArray[index].star = !ideasArray[index].star;
-    ideasArray[index].saveToStorage(ideasArray);
+    ideasArray[getIndex(e)].star = !ideasArray[index].star;
+    ideasArray[getIndex(e)].saveToStorage(ideasArray);
+    sortIdeas();
     favoriteIdea(e);
   };
 };
 
-function compareArray(array1, array2) {
-  console.log('hi');
-  clearIdeaBoard();
-  var searchArray = [];
-  array1.forEach(function(ideaObj) {
-    if (array2.includes(ideaObj)) {
-      searchArray.push(ideaObj);
-      displayIdea(ideaObj);
-    }
-  })
-  console.log(searchArray)
-  return searchArray
-}
+// function compareArray(array1, array2) {
+//   console.log('hi');
+//   clearIdeaBoard();
+//   var searchArray = [];
+//   array1.forEach(function(ideaObj) {
+//     if (array2.includes(ideaObj)) {
+//       searchArray.push(ideaObj);
+//       displayIdea(ideaObj);
+//     }
+//   })
+//   console.log(searchArray)
+//   return searchArray
+// }
 
 function filterBySearch() { 
   return ideasrray.filter(function(idObj) {
@@ -215,6 +229,8 @@ function repopulateMain() {
   };
 };
 
+// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
+
 var navListener = document.querySelector("nav");navListener.addEventListener('click', filterStar)
 
 function filterStar(e) {
@@ -230,16 +246,9 @@ function filterStar(e) {
   }
 }
 
-function filterQuality(e, num) {
-  if (e.target.closest('#js-switch')) {
-    return ideasArray.filter(function(ideaObj) {
-      return ideaObj.quality === num;
-    });
-  }
+function sortIdeas() {
+  ideasArray.forEach(function(ideaObj) {
+    qualitiesArray[ideaObj.quality].push(ideaObj)
+  })
 }
- 
-function handleQualityFilter(e) {
-  if (e.target.closest('#js-switch')) {
-   
-  }
-}
+
