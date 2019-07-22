@@ -45,12 +45,11 @@ function disableSave() {
 };
 
 function displayIdea(ideaObj) {
-  var star;
   var qualityText = qualitiesArray[ideaObj.quality]
   if (ideaObj.star === true) {
-    star = 'images/star-active.svg';
+    var star = 'images/star-active.svg';
   } else {
-    star = 'images/star.svg';
+    var star = 'images/star.svg';
   }
 
   ideaBoard.insertAdjacentHTML(
@@ -91,22 +90,14 @@ function persistOnLoad() {
  };
 
 function navEventHandler(e) {
-//do we want to go get the node list or just set it to [9, 11,13]?
-  var nodesIndexList = [];
-  var pCNodes = e.target.parentNode.childNodes;
-  for (var i = 0 ; i < pCNodes.length; i++){
-    if (pCNodes[i].id === 'js-switch'){
-      nodesIndexList.push(i)
-    }
+    var nodesIndexList = document.querySelectorAll('.js-switch')
+    nodesIndexList.forEach(function(index){
+      index.classList.add('swill-quality');
+      index.classList.remove('swill-quality-active');
+    })
+    e.target.closest('.js-switch').classList.add('swill-quality-active'); 
   }
 
-  nodesIndexList.forEach(function(index){
-    pCNodes[index].classList.add('swill-quality');
-    pCNodes[index].classList.remove('swill-quality-active');
-  })
-
-  e.target.closest('.nav__button').classList.add('swill-quality-active'); 
-};
 
 function updateArticle(e) {
   e.preventDefault();
@@ -204,8 +195,8 @@ function compareArray(array1, array2) {
   return searchArray
 }
 
-function filterBySearch(array) { 
-  return array.filter(function(idObj) {
+function filterBySearch() { 
+  return ideasrray.filter(function(idObj) {
     return idObj.body.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase()) 
      || idObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase());
   });
@@ -224,7 +215,7 @@ function repopulateMain() {
   };
 };
 
-var navListener = document.querySelector("nav");navListener.addEventListener('click', filterQuality)
+var navListener = document.querySelector("nav");navListener.addEventListener('click', filterStar)
 
 function filterStar(e) {
   var favIdeas = [];
@@ -233,9 +224,8 @@ function filterStar(e) {
       if (ideaObj.star === true) {
         favIdeas.push(ideaObj)
       }
-      compareArray(favIdeas, ideasArray)
+      compareArray(favIdeas, filterQuality())
     })
-    // console.log(favIdeas)
     return favIdeas
   }
 }
@@ -247,4 +237,9 @@ function filterQuality(e, num) {
     });
   }
 }
-
+ 
+function handleQualityFilter(e) {
+  if (e.target.closest('#js-switch')) {
+   
+  }
+}
