@@ -202,7 +202,6 @@ main {
   grid-gap: 10% 2%;
     /*display: grid;*/
     grid-template-columns: repeat(auto-fit, minmax(min-content, 400px))
-  }
 }
 
 article {
@@ -324,6 +323,7 @@ card p {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 2% 2%;
+    justify-content: 
 
 }
 
