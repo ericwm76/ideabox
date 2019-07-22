@@ -64,6 +64,7 @@ nav button{
   margin: 10px 15px 25px;
   font-size: 1.25em;
   font-weight: 700;
+  display: block;
 }
 
 /* middle 3 buttons */
@@ -79,6 +80,7 @@ nav button{
   text-align: left;
   font-size: 1.2em;
   font-weight: 400;
+  width: 100%;
 }
 /*not a hover this is the selected state */
 .swill-quality-active {
@@ -93,20 +95,22 @@ nav button{
   text-align: left;
   font-size: 1.2em;
   font-weight: 400;
+  width: 100%;
 }
- #quality-btn {
-  margin-left: 0px;
-  width:100%;
+
+ #quality-btn, #show-star-btn, #more-less-btn {
+  /*margin-left: 0px;*/
+  width: 90%;
   border-radius: 3px;
  }
 
-#show-star-btn {
-  border-radius: 3px;
-}
-
+ #show-star-btn, #more-less-btn {
+  margin: 10px 15px 25px 15px;
+  width: 90%;
+ }
 
 nav form {
-  padding:0px 15px;
+  /*padding:0px 15px;*/
   border-bottom: 3px solid #353567;
 }
 
@@ -115,13 +119,14 @@ nav form label {
   font-size: .95em;
   display: block;
   font-weight: 700;
-  margin: 15px 0px 7px;
+  margin: 15px 15px 7px 15px;
 }
 nav form input {
   color: #5356A4;
-  width: 100%;
+  width: 90%;
   height:45px;
-  margin-bottom: 20px;
+  margin: 15px 15px 20px 15px;
+  /*margin-bottom: 20px;*/
 }
 
 section {
@@ -230,19 +235,23 @@ article div {
 }
 
 article p {
-  margin: 8px 12px;
+  padding: 8px 12px;
 }
 
 .article__title {
   font-weight: 700;
   margin-top: 20px;
   font-size: 1.2em;
+
 }
 
 .article__body {
   margin-bottom: 24px;
   font-size: 1.2em;
   line-height: 1.4em;
+  width: 100%;
+  min-height: 120px;
+  max-height: 120px;
 }
 
 article footer {
@@ -335,7 +344,7 @@ card p {
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 575px) {
   body {
     display: grid;
     grid-template-columns: 1fr;
