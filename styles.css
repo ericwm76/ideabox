@@ -32,6 +32,10 @@ nav {
   flex-direction: column;
 }
 
+nav img {
+  display: none;
+}
+
 nav h1 {
   font-size: 1.25em;
   font-weight: 700;
@@ -276,13 +280,41 @@ card p {
 
 @media screen and (max-width: 900px) {
   body {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 10vh 50vh auto;
-  grid-template-areas: 
-      'nav'
-      'section'
-      'main';
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 8vh 50vh auto;
+    grid-template-areas: 
+        'nav'
+        'section'
+        'main';
+  }
+
+  nav {
+    align-items: center;
+    flex-direction: row;
+    height: 8vh;
+    justify-content: flex-start;
+    position: fixed;
+    width: 100%;
+  }
+
+  nav img {
+    display: inline-block;
+    height: 50px;
+    position: fixed;
+    width: 50px;
+  }
+
+  nav h1 {
+    align-self: center;
+    display: inline-block;
+    margin: auto;
+    padding: 0;
+    width: auto;
+  }
+
+  .menu {
+    display: none;
   }
 
   section {
@@ -305,13 +337,41 @@ card p {
 
 @media screen and (max-width: 500px) {
   body {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 10vh 50vh auto;
-  grid-template-areas: 
-      'nav'
-      'section'
-      'main';
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 8vh 50vh auto;
+    grid-template-areas: 
+        'nav'
+        'section'
+        'main';
+  }
+
+  nav {
+    align-items: center;
+    flex-direction: row;
+    height: 8vh;
+    justify-content: flex-start;
+    position: fixed;
+    width: 100%;
+  }
+
+  nav img {
+    display: inline-block;
+    height: 50px;
+    position: fixed;
+    width: 50px;
+  }
+
+  nav h1 {
+    align-self: center;
+    display: inline-block;
+    margin: auto;
+    padding: 0;
+    width: auto;
+  }
+
+  .menu {
+    display: none;
   }
 
   section {
