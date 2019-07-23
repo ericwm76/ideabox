@@ -6,6 +6,7 @@ var ideaBoard = document.querySelector('main');
 var titleInput = document.querySelector('#title-input');
 var bodyInput = document.querySelector('#idea-body');
 var saveBtn = document.querySelector('#save-btn');
+var showStarBtn = document.querySelector('#show-star-btn');
 
 
 document.querySelector('nav').addEventListener('click', navEventHandler);
@@ -230,18 +231,6 @@ function saveStar(e) {
   };
 };
 
-function compareArray(array1, array2) {
-  clearIdeaBoard();
-  var searchArray = [];
-  array1.forEach(function(ideaObj) {
-    if (array2.includes(ideaObj)) {
-      searchArray.push(ideaObj);
-      displayIdea(ideaObj);
-    }
-  })
-  return searchArray
-}
-
 function filterBySearch() { 
   var totalArray = qualitiesArray.concat([ideasArray]);
   var searchedArray = totalArray[getActiveFilter()].filter(function(idObj) {
@@ -252,12 +241,12 @@ function filterBySearch() {
 };
 
 
-function getActiveFilter (){
+function getActiveFilter() {
   var activeFilter = 4;
-  document.querySelectorAll('.js-switch').forEach(function(btn){
+  document.querySelectorAll('.js-switch').forEach(function(btn) {
     if (btn.classList.contains('swill-quality-active')) {
-      activeFilter = parseInt(btn.dataset.quality)
-    }
+      activeFilter = parseInt(btn.dataset.quality);
+    };
   });
   return activeFilter;
 }
@@ -280,18 +269,36 @@ function repopulateMain() {
 };
 
 
-// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
+// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 function filterStar(e) {
-  var favIdeas = [];
   if (e.target.closest('#show-star-btn')) {
+    toggleStarBtn(e);
+  };
+};
+
+function displayStarredIdeas() {
+  var favIdeas = [];
     ideasArray.filter(function(ideaObj) {
       if (ideaObj.star === true) {
         favIdeas.push(ideaObj)
       };
-      compareArray(favIdeas, ideasArray)
+      clearIdeaBoard();
+      favIdeas.forEach(function(ideaObj) {
+        displayIdea(ideaObj);
+      })
     });
-    return favIdeas;
+  };
+
+function toggleStarBtn() {
+  if (showStarBtn.classList.contains('active')) {
+    showStarBtn.classList.remove('active');
+    showStarBtn.innerText = 'Show Starred Ideas';
+    persistOnLoad();
+  } else {
+    showStarBtn.classList.add('active');
+    showStarBtn.innerText = 'View All Ideas';
+    displayStarredIdeas();
   };
 };
 
