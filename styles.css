@@ -30,6 +30,7 @@ nav {
   color: white;
   display: flex;
   flex-direction: column;
+  transition: ease all .5s;
 }
 
 nav img {
@@ -357,6 +358,10 @@ card p {
     grid-template-columns: 1fr 1fr;
   }
 
+  card{
+    width: 200%;
+  }
+
   article {
     max-width: 350px;
   }
@@ -420,6 +425,9 @@ card p {
     grid-template-columns: 1fr;
     grid-gap: 2% 2%;
     padding: 10px 5%;
+  }
+  card{
+    width: 100%;
   }
 
   article {
