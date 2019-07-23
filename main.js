@@ -317,8 +317,8 @@ function showMoreLess(e) {
         lessIdeas.unshift(ideasArray[ideasArray.length - 1 -i]);
       }; 
       clearIdeaBoard()
-      lessIdeas.forEach(function(idea) {
-      displayIdea(idea);
+      lessIdeas.forEach(function(ideaObj) {
+      displayIdea(ideaObj);
       });
       e.target.innerHTML = 'Show More';
     } else {
