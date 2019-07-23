@@ -8,14 +8,13 @@ var bodyInput = document.querySelector('#idea-body');
 var saveBtn = document.querySelector('#save-btn');
 var showStarBtn = document.querySelector('#show-star-btn');
 
-
-document.querySelector('nav').addEventListener('click', navEventHandler);
 ideaBoard.addEventListener('click', updateArticle);
 ideaBoard.addEventListener('focusout', saveCard);
 ideaBoard.addEventListener('keydown', saveOnEnter);
-document.querySelector('#search-input').addEventListener('keyup', repopulateMain);
 ideaInputs.addEventListener('keyup', disableSave);
 ideaInputs.addEventListener('click', runAll);
+document.querySelector('nav').addEventListener('click', navEventHandler);
+document.querySelector('#search-input').addEventListener('keyup', repopulateMain);
 
 startOnLoad();
 persistOnLoad();
@@ -113,30 +112,47 @@ function persistOnLoad() {
  };
 
 function navEventHandler(e) {
-  if (e.target.closest('.js-switch')) {  
-    var nodesIndexList = document.querySelectorAll('.js-switch')
-    nodesIndexList.forEach(function(index){
-      index.classList.add('swill-quality');
-      index.classList.remove('swill-quality-active');
-    });
-    e.target.closest('.js-switch').classList.add('swill-quality-active'); 
-    clearIdeaBoard();
-    qualitiesArray[parseInt(e.target.dataset.quality)].forEach(function(ideaObj) {
-      displayIdea(ideaObj);
-    });
+  if (e.target.id === 'more-less-btn') {
+    showMoreLess(e);
+  };
+  if (e.target.closest('#show-star-btn')) {
+    toggleStarBtn(e);
+  };
+  if (e.target.closest('.js-switch')) {
+    toggleQualities(e);
   }
   if (e.target.closest('#menu-button')) {
-    if (e.target.src.includes('images/menu.svg')) {
-    document.querySelector('#menu-active').classList.remove('menu');
-    document.querySelector('main').classList.add('darken');
-    e.target.src = 'images/menu-close.svg';
-    } else {
-    document.querySelector('#menu-active').classList.add('menu');
-    document.querySelector('main').classList.remove('darken');
-    e.target.src = 'images/menu.svg';
-    };
-  };  
+    toggleBurger(e);
+  }  
+}
+
+function toggleQualities(e) {
+  console.log('hi')
+  var nodesIndexList = document.querySelectorAll('.js-switch')
+  nodesIndexList.forEach(function(index){
+    index.classList.add('swill-quality');
+    index.classList.remove('swill-quality-active');
+  });
+  e.target.closest('.js-switch').classList.add('swill-quality-active'); 
+  clearIdeaBoard();
+  console.log(e.target.dataset.quality);
+  qualitiesArray[parseInt(e.target.dataset.quality)].forEach(function(ideaObj) {
+    displayIdea(ideaObj);
+    console.log('bye')
+  });
 };
+
+function toggleBurger(e) {
+  if (e.target.src.includes('images/menu.svg')) {
+  document.querySelector('#menu-active').classList.remove('menu');
+  document.querySelector('main').classList.add('darken');
+  e.target.src = 'images/menu-close.svg';
+  } else {
+  document.querySelector('#menu-active').classList.add('menu');
+  document.querySelector('main').classList.remove('darken');
+  e.target.src = 'images/menu.svg';
+  };
+};  
 
 function updateArticle(e) {
   e.preventDefault();
@@ -247,7 +263,7 @@ function compareArray(array1, array2) {
   array1.forEach(function(ideaObj) {
     if (array2.includes(ideaObj)) {
       searchArray.push(ideaObj);
-      displayIdea(ideaObj);
+      // displayIdea(ideaObj);
     }
   })
   return searchArray
@@ -283,30 +299,31 @@ function repopulateMain() {
 
 // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-function filterStar(e) {
-  if (e.target.closest('#show-star-btn')) {
-    toggleStarBtn(e);
-  };
-};
-
 function displayStarredIdeas() {
   var favIdeas = [];
     ideasArray.filter(function(ideaObj) {
       if (ideaObj.star === true) {
         favIdeas.push(ideaObj)
       };
-      clearIdeaBoard();
+    });
+      if (favIdeas.length === 0) {
+        ideaBoard.insertAdjacentHTML("afterbegin", `<card id="js-no-fave-msg"><p>You have no starred ideas! Click the star on the card to favorite your ideas!</p></card>`);
+        showStarBtn.classList.remove('active');
+        showStarBtn.innerText = 'Show Starred Ideas';
+        return favIdeas;
+      };
+        clearIdeaBoard();
       favIdeas.forEach(function(ideaObj) {
         displayIdea(ideaObj);
-      });
+        });
       return favIdeas;
-    });
   };
 
 function toggleStarBtn() {
   if (showStarBtn.classList.contains('active')) {
     showStarBtn.classList.remove('active');
     showStarBtn.innerText = 'Show Starred Ideas';
+    clearIdeaBoard();
     persistOnLoad();
   } else {
     showStarBtn.classList.add('active');
@@ -321,8 +338,7 @@ function sortIdeas() {
   });
 };
 
-var navListener = document.querySelector('nav');
-navListener.addEventListener('click', filterStar);
+
 
 function injectIntro() {
   if (ideaBoard.innerHTML === '' || ideaBoard.innerHTML === ' '){
@@ -341,28 +357,24 @@ function removeIntro() {
   };  
 };
 
-navListener.addEventListener('click', showMoreLess);
-
 //need to refactor so opposite functions.
 
 function showMoreLess(e) { 
-  if (e.target.id === 'more-less-btn'){
-    if (e.target.classList.contains('nav__button') && e.target.classList.contains('active')) {
-      e.target.classList.remove('active');
-      var lessIdeas = [];
-      for (var i = 0; i < 10; i++){
-        lessIdeas.unshift(ideasArray[ideasArray.length - 1 -i]);
-      }; 
-      clearIdeaBoard()
-      lessIdeas.forEach(function(ideaObj) {
-      displayIdea(ideaObj);
-      });
-      e.target.innerHTML = 'Show More';
-    } else {
-      e.target.classList.add('active');
-      e.target.innerHTML = 'Show Less';
-      clearIdeaBoard();
-      persistOnLoad();
-    };
+  if (e.target.classList.contains('nav__button') && e.target.classList.contains('active')) {
+    e.target.classList.remove('active');
+    var lessIdeas = [];
+    for (var i = 0; i < 10; i++){
+      lessIdeas.unshift(ideasArray[ideasArray.length - 1 -i]);
+    }; 
+    clearIdeaBoard()
+    lessIdeas.forEach(function(ideaObj) {
+    displayIdea(ideaObj);
+    });
+    e.target.innerHTML = 'Show More';
+  } else {
+    e.target.classList.add('active');
+    e.target.innerHTML = 'Show Less';
+    clearIdeaBoard();
+    persistOnLoad();
   };
 };

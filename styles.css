@@ -293,6 +293,10 @@ card p {
   font-size: 1.5em;
 }
 
+#js-no-fave-msg {
+  width: 100%;
+}
+
 @media screen and (max-width: 900px) {
   body {
     display: grid;
