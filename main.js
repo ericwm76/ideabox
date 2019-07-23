@@ -223,26 +223,24 @@ function favoriteIdea(e) {
 
 function saveStar(e) {
   if (e.target.closest("#star-img")) {
-    ideasArray[getIndex(e)].star = !ideasArray[index].star;
+    ideasArray[getIndex(e)].star = !ideasArray[getIndex(e)].star;
     ideasArray[getIndex(e)].saveToStorage(ideasArray);
     sortIdeas();
     favoriteIdea(e);
   };
 };
 
-// function compareArray(array1, array2) {
-//   console.log('hi');
-//   clearIdeaBoard();
-//   var searchArray = [];
-//   array1.forEach(function(ideaObj) {
-//     if (array2.includes(ideaObj)) {
-//       searchArray.push(ideaObj);
-//       displayIdea(ideaObj);
-//     }
-//   })
-//   console.log(searchArray)
-//   return searchArray
-// }
+function compareArray(array1, array2) {
+  clearIdeaBoard();
+  var searchArray = [];
+  array1.forEach(function(ideaObj) {
+    if (array2.includes(ideaObj)) {
+      searchArray.push(ideaObj);
+      displayIdea(ideaObj);
+    }
+  })
+  return searchArray
+}
 
 function filterBySearch() { 
   return ideasrray.filter(function(idObj) {
@@ -274,7 +272,7 @@ function filterStar(e) {
       if (ideaObj.star === true) {
         favIdeas.push(ideaObj)
       };
-      compareArray(favIdeas, filterQuality())
+      compareArray(favIdeas, ideasArray)
     });
     return favIdeas;
   };
