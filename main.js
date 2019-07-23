@@ -119,6 +119,12 @@ function navEventHandler(e) {
       index.classList.remove('swill-quality-active');
     });
     e.target.closest('.js-switch').classList.add('swill-quality-active'); 
+    clearIdeaBoard();
+    qualitiesArray[parseInt(e.target.dataset.quality)].forEach(function(
+      ideaObj
+    ) {
+      displayIdea(ideaObj);
+    });
   }
 
 
