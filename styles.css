@@ -6,30 +6,32 @@
 }
 
 body {
+  background-color: #eaeaf4;
+  font-family: 'Open Sans', sans-serif;
+  height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 55% 1fr;
   grid-template-areas: 
   'nav section section section'
   'nav main main main';
-  font-family: 'Open Sans', sans-serif;
-  height: 100vh;
-  background-color: #eaeaf4;
 }
 
 img {
   height: 30px;
   width: 30px;
 }
+
 button:focus {outline:0;}
 
 nav {
-  height: 100%;
   background-color: #1F1F3D;
-  grid-area: nav;
   color: white;
   display: flex;
   flex-direction: column;
+  grid-area: nav;
+  height: 100%;
+  transition: ease all .5s;
 }
 
 nav img {
@@ -37,18 +39,18 @@ nav img {
 }
 
 nav h1 {
+  border-bottom: 3px solid #353567;
   font-size: 1.25em;
   font-weight: 700;
-  padding: 15px;
   margin: 10px 0px;
-  border-bottom: 3px solid #353567;
+  padding: 15px;
 }
 
 nav h6 {
   color: #5356A4;
   font-size: .95em;
-  padding: 15px;
   margin: 10px 0px;
+  padding: 15px;
 }
 
 .filter-header {
@@ -63,13 +65,13 @@ nav h6 {
 
 nav button{
   background-color: #5356A4;
-  color: #E9E9F3;
   border: 1px solid #5356A4;
-  padding: 10px 0px 10px 0px;
-  margin: 10px 15px 25px;
+  color: #E9E9F3;
+  display: block;
   font-size: 1.25em;
   font-weight: 700;
-  display: block;
+  margin: 10px 15px 25px;
+  padding: 10px 0px 10px 0px;
 }
 
 /* middle 3 buttons */
@@ -80,11 +82,11 @@ nav button{
   border-right: none;
   border-top: none;
   color: #FFFFFF; 
+  font-size: 1.2em;
+  font-weight: 400;
   margin: 0px;
   padding: 10px 0px 10px 8px;
   text-align: left;
-  font-size: 1.2em;
-  font-weight: 400;
   width: 100%;
 }
 /*not a hover this is the selected state */
@@ -95,18 +97,18 @@ nav button{
   border-right: none;
   border-top: none;
   color: #FFFFFF; 
+  font-size: 1.2em;
+  font-weight: 400;
   margin: 0px;
   padding: 10px 0px 10px 8px;
   text-align: left;
-  font-size: 1.2em;
-  font-weight: 400;
   width: 100%;
 }
 
  #quality-btn, #show-star-btn, #more-less-btn {
   /*margin-left: 0px;*/
-  width: 90%;
   border-radius: 3px;
+  width: 90%;
  }
 
  #show-star-btn, #more-less-btn {
@@ -121,22 +123,22 @@ nav form {
 
 nav form label {
   color: #5356A4;
-  font-size: .95em;
   display: block;
+  font-size: .95em;
   font-weight: 700;
   margin: 15px 15px 7px 15px;
 }
 nav form input {
   color: #5356A4;
-  width: 90%;
   height:45px;
   margin: 15px 15px 20px 15px;
+  width: 90%;
   /*margin-bottom: 20px;*/
 }
 
 section {
-  grid-area: section;
   background-color: #A9AAD2;
+  grid-area: section;
   padding: 10px 27%;
 }
 
@@ -146,53 +148,53 @@ section form {
   height: 100%;
 }
 section form label{
-    font-weight: 700;
     color: #1F1F3D;
     font-size: 1em;
+    font-weight: 700;
     margin: 15px 0px 10px 0px;
 }
 
 section form div img{
-  margin: 12px;
   height: 24px;
+  margin: 12px;
   width: 24px;
 }
 
 section form input {
-  color:#5356A4;
-  margin-bottom: 15px;
-  border: 1px solid #353567;
-  height: 11%;
-  padding: 5px;
   border-radius: 3px;
+  border: 1px solid #353567;
+  color:#5356A4;
+  height: 11%;
+  margin-bottom: 15px;
+  padding: 5px;
 }
 
 section form textarea {
-  color:#5356A4;  
-  margin-bottom: 20px;
-  border: 1px solid #353567;
-  resize: none;
-  height: 24%;
-  padding: 5px;
   border-radius: 3px;
+  border: 1px solid #353567;
+  color:#5356A4;  
+  height: 24%;
+  margin-bottom: 20px;
+  padding: 5px;
+  resize: none;
 }
 
 section form button {
-  color: #FFFFFF;
   background-color: #353567;
-  border: #353567;
-  margin-bottom: 20px;
-  padding: 15px;
   border-radius: 3px;
+  border: #353567;
+  color: #FFFFFF;
   font-size: 1.2em;
   letter-spacing: 1px;
+  margin-bottom: 20px;
+  padding: 15px;
 }
 
 section div {
-  display: flex;
   background-color: #353567;
-  height: 12%;
   border-radius: 3px;
+  display: flex;
+  height: 12%;
 }
 
 section div input {
@@ -218,24 +220,24 @@ main {
 }
 
 article {
-  height: fit-content;
   background-color: white;
   border: 2px solid #1F1F3D;
-  max-width: 350px;
+  height: fit-content;
   margin: auto;
+  max-width: 350px;
 }
 
 article header {
+  background-color: #1F1F3D;
   display: flex;
   justify-content: space-between;
-  background-color: #1F1F3D;
   padding: 3px;
 }
 
 article div {
-  height:100%;
   display: flex;
   flex-direction: column;
+  height:100%;
   justify-content: space-between;
 }
 
@@ -244,29 +246,29 @@ article p {
 }
 
 .article__title {
+  font-size: 1.2em;
   font-weight: 700;
   margin-top: 20px;
-  font-size: 1.2em;
 
 }
 
 .article__body {
-  margin-bottom: 24px;
   font-size: 1.2em;
   line-height: 1.4em;
-  width: 100%;
-  min-height: 120px;
+  margin-bottom: 24px;
   max-height: 120px;
+  min-height: 120px;
+  width: 100%;
 }
 
 article footer {
-  display: flex;
-  justify-content: space-between;
-  color: #FFFFFF;
-  background-color: #5356A4;
-  padding: 8px 5px;
   align-items: center;
+  background-color: #5356A4;
+  color: #FFFFFF;
+  display: flex;
   height: 41px;
+  justify-content: space-between;
+  padding: 8px 5px;
 }
 
 article footer p {
@@ -274,33 +276,33 @@ article footer p {
 }
 
 card {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  width:300%;
-  height:300px;
-  border-radius:150px;
-  margin-left: auto;
-  border: 2px dashed #5356A4;
   align-self: center;
-  justify-self: center;
   background-color: ##eaeaf4;
+  border-radius:150px;
+  border: 2px dashed #5356A4;
+  display: flex;
+  height:300px;
+  justify-content: center;
+  justify-self: center;
+  margin-left: auto;
+  width:300%;
 }
 
 card p {
-  width:200px;
   background-color: ##eaeaf4
+  width:200px;
 }
 
 @media screen and (max-width: 900px) {
   body {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 8vh 50vh auto;
     grid-template-areas: 
         'nav'
         'section'
         'main';
+    grid-template-columns: 1fr;
+    grid-template-rows: 8vh 50vh auto;
   }
 
   nav {
@@ -333,11 +335,11 @@ card p {
   }
 
   #menu-active {
-    position: absolute;
+    background-color: #1F1F3D;
     left: 0;
+    position: absolute;
     top: 8vh;
     width: 100%;
-    background-color: #1F1F3D;
   }
 
   section {
@@ -354,7 +356,11 @@ card p {
   }
 
   .darken {
-  filter: brightness(35%);
+    filter: brightness(35%);
+  }
+
+  card {
+    width: 200%;
   }
 
   article {
@@ -365,12 +371,12 @@ card p {
 @media screen and (max-width: 575px) {
   body {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 8vh 50vh auto;
     grid-template-areas: 
         'nav'
         'section'
         'main';
+    grid-template-columns: 1fr;
+    grid-template-rows: 8vh 50vh auto;
   }
 
   nav {
@@ -403,11 +409,11 @@ card p {
   }
 
   #menu-active {
+    background-color: #1F1F3D;
+    top: 8vh;
     position: absolute;
     left: 0;
-    top: 8vh;
     width: 100%;
-    background-color: #1F1F3D;
   }
 
   section {
@@ -415,11 +421,14 @@ card p {
   }
 
   main {
-    grid-area: main;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-area: main;
     grid-gap: 2% 2%;
+    grid-template-columns: 1fr;
     padding: 10px 5%;
+  }
+  card{
+    width: 100%;
   }
 
   .darken {
