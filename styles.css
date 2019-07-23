@@ -219,10 +219,6 @@ main {
   padding: 20px;
 }
 
-.darken {
-  filter: brightness(35%);
-}
-
 article {
   background-color: white;
   border: 2px solid #1F1F3D;
@@ -359,7 +355,11 @@ card p {
     grid-template-columns: 1fr 1fr;
   }
 
-  card{
+  .darken {
+    filter: brightness(35%);
+  }
+
+  card {
     width: 200%;
   }
 
@@ -429,6 +429,10 @@ card p {
   }
   card{
     width: 100%;
+  }
+
+  .darken {
+  filter: brightness(35%);
   }
 
   article {
