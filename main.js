@@ -15,7 +15,7 @@ ideaBoard.addEventListener('focusout', saveCard);
 ideaBoard.addEventListener('keydown', saveOnEnter);
 document.querySelector('#search-input').addEventListener('keyup', repopulateMain);
 ideaInputs.addEventListener('keyup', disableSave);
-ideaInputs.addEventListener("click", runAll);
+ideaInputs.addEventListener('click', runAll);
 
 startOnLoad();
 persistOnLoad();
@@ -121,9 +121,7 @@ function navEventHandler(e) {
     });
     e.target.closest('.js-switch').classList.add('swill-quality-active'); 
     clearIdeaBoard();
-    qualitiesArray[parseInt(e.target.dataset.quality)].forEach(function(
-      ideaObj
-    ) {
+    qualitiesArray[parseInt(e.target.dataset.quality)].forEach(function(ideaObj) {
       displayIdea(ideaObj);
     });
   }
@@ -233,16 +231,30 @@ function saveStar(e) {
 
 function filterBySearch() { 
   var totalArray = qualitiesArray.concat([ideasArray]);
+  console.log(totalArray);
   var searchedArray = totalArray[getActiveFilter()].filter(function(idObj) {
     return idObj.body.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase()) 
      || idObj.title.toLowerCase().includes(document.querySelector('#search-input').value.toLowerCase());
   });
+  if (showStarBtn.classList.contains('active')) {
+    searchedArray = compareArray(searchedArray, displayStarredIdeas());
+  }
   return searchedArray;
 };
 
+function compareArray(array1, array2) {
+  var searchArray = [];
+  array1.forEach(function(ideaObj) {
+    if (array2.includes(ideaObj)) {
+      searchArray.push(ideaObj);
+      displayIdea(ideaObj);
+    }
+  })
+  return searchArray
+}
 
 function getActiveFilter() {
-  var activeFilter = 4;
+  var activeFilter = 3;
   document.querySelectorAll('.js-switch').forEach(function(btn) {
     if (btn.classList.contains('swill-quality-active')) {
       activeFilter = parseInt(btn.dataset.quality);
@@ -286,7 +298,8 @@ function displayStarredIdeas() {
       clearIdeaBoard();
       favIdeas.forEach(function(ideaObj) {
         displayIdea(ideaObj);
-      })
+      });
+      return favIdeas;
     });
   };
 
