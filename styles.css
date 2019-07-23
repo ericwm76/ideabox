@@ -217,6 +217,10 @@ main {
   padding: 20px;
 }
 
+.darken {
+  filter: brightness(35%);
+}
+
 article {
   height: fit-content;
   background-color: white;
@@ -310,6 +314,7 @@ card p {
     justify-content: flex-start;
     position: fixed;
     width: 100%;
+    z-index: 10;
   }
 
   nav img {
@@ -375,13 +380,14 @@ card p {
     justify-content: flex-start;
     position: fixed;
     width: 100%;
+    z-index: 10;
   }
 
   nav img {
     display: inline-block;
-    height: 50px;
+    height: 45px;
     position: fixed;
-    width: 50px;
+    width: 45px;
   }
 
   nav h1 {

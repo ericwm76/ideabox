@@ -120,15 +120,14 @@ function navEventHandler(e) {
     });
     e.target.closest('.js-switch').classList.add('swill-quality-active'); 
   }
-
-
   if (e.target.closest('#menu-button')) {
-    console.log('hamburger')
-    if (e.target.src === "images/menu.svg") {
+    if (e.target.src.includes('images/menu.svg')) {
     document.querySelector('#menu-active').classList.remove('menu');
+    document.querySelector('main').classList.add('darken');
     e.target.src = 'images/menu-close.svg';
     } else {
     document.querySelector('#menu-active').classList.add('menu');
+    document.querySelector('main').classList.remove('darken');
     e.target.src = 'images/menu.svg';
     };
   };  
