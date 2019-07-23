@@ -223,7 +223,7 @@ function favoriteIdea(e) {
 
 function saveStar(e) {
   if (e.target.closest("#star-img")) {
-    ideasArray[getIndex(e)].star = !ideasArray[index].star;
+    ideasArray[getIndex(e)].star = !ideasArray[getIndex(e)].star;
     ideasArray[getIndex(e)].saveToStorage(ideasArray);
     sortIdeas();
     favoriteIdea(e);
