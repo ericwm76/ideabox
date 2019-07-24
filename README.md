@@ -1,4 +1,17 @@
+*Learning Goals:
 
+Improve our ability to utilize JavaScript objects.
+Make use of Git work flow.
+Properly utilize event delegation and event handlers.
+Write clean DRY code.
+User input data that persists through browser refreshes and restarts.
+
+*this.experience:
+
+1. Our team collaborated well, getting off to a great start.
+2. We started with a strong HTML foundation and continued building clean modular code.  
+3. Team retro’s were frequent, and reaching group consensus
+4. We had an effective mix of independent, pairing, and whole group work. 
 
 
 
