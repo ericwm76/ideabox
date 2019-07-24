@@ -10,7 +10,7 @@
 
 <details><summary>No Stared Ideas</summary>
 
-[Imgur](https://i.imgur.com/HSzBFw9.png)
+![](https://i.imgur.com/HSzBFw9.png)
 
 </details>
 
