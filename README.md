@@ -1,4 +1,4 @@
-# IdeaBox Redux: This time it's for real
+# IdeaBox Redux: this.timeItsForReal
 
 ### this.learningGoals:
 
@@ -12,11 +12,11 @@
 
 1. Our team collaborated well, getting off to a great start.
 2. We started with a strong HTML foundation and continued building clean modular code.  
-3. Team retro’s were frequent, and reaching group consensus
+3. Team retros were frequent, and reaching group consensus
 4. We had an effective mix of independent, pairing, and whole group work. 
 
 
-## Comp Images
+## this.compImages
 
 <details><summary>Full Size Comp</summary>
 
@@ -31,7 +31,7 @@
 </details>
 
 
-## Images of Our Project
+## this.imagesOfOurProject
 
 <details><summary>Opening Page</summary>
 
