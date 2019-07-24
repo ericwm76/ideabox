@@ -1,6 +1,6 @@
 # IdeaBox Redux: This time it's for real
 
-### Learning Goals:
+### this.learningGoals:
 
 1. Improve our ability to utilize JavaScript objects.
 2. Make use of Git work flow.
