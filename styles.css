@@ -220,7 +220,7 @@ article {
   height: fit-content;
   margin: auto;
   margin-top: 25px;
-  width: 245px;
+  width: 252px;
 }
 
 article header {
@@ -292,10 +292,10 @@ card p {
   width: 100%;
 }
 
-@media screen and (max-width: 1020px) {
+@media screen and (max-width: 1040px) {
   
   body {
-    display: grid;
+    /*display: grid;*/
     grid-template-areas: 
         'nav'
         'section'
