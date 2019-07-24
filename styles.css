@@ -2,7 +2,6 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  /*border: 1px solid red;*/
 }
 
 body {
@@ -30,7 +29,6 @@ nav {
   display: flex;
   flex-direction: column;
   grid-area: nav;
-  height: 100%;
   transition: ease all .5s;
 }
 
@@ -58,12 +56,12 @@ nav h6 {
     padding-top: 20px;
 }
 
-.active{
+.active {
   background-color: #D12119;
   border: 1px solid #F58E72;
 }
 
-nav button{
+nav button {
   background-color: #5356A4;
   border: 1px solid #5356A4;
   color: #E9E9F3;
@@ -74,7 +72,6 @@ nav button{
   padding: 10px 0px 10px 0px;
 }
 
-/* middle 3 buttons */
 .swill-quality {
   background-color: #1F1F3D;
   border-bottom: none;
@@ -89,7 +86,7 @@ nav button{
   text-align: left;
   width: 100%;
 }
-/*not a hover this is the selected state */
+
 .swill-quality-active {
   background-color: #D12119;
   border-bottom: none;
@@ -106,7 +103,6 @@ nav button{
 }
 
  #quality-btn, #show-star-btn, #more-less-btn {
-  /*margin-left: 0px;*/
   border-radius: 3px;
   width: 90%;
  }
@@ -117,7 +113,6 @@ nav button{
  }
 
 nav form {
-  /*padding:0px 15px;*/
   border-bottom: 3px solid #353567;
 }
 
@@ -133,7 +128,6 @@ nav form input {
   height:45px;
   margin: 15px 15px 20px 15px;
   width: 90%;
-  /*margin-bottom: 20px;*/
 }
 
 section {
@@ -147,14 +141,15 @@ section form {
   flex-direction: column;
   height: 100%;
 }
-section form label{
+
+section form label {
     color: #1F1F3D;
     font-size: 1em;
     font-weight: 700;
     margin: 15px 0px 10px 0px;
 }
 
-section form div img{
+section form div img {
   height: 24px;
   margin: 12px;
   width: 24px;
@@ -213,10 +208,10 @@ main {
   background-color: #eaeaf4;
   display: grid;
   grid-area: main;
-  grid-gap: 10% 2%;
+  grid-gap: 0% 2%;
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
-  padding: 20px;
+  padding: 0px 20px 20px;
 }
 
 article {
@@ -224,7 +219,8 @@ article {
   border: 2px solid #1F1F3D;
   height: fit-content;
   margin: auto;
-  max-width: 350px;
+  margin-top: 25px;
+  width: 252px;
 }
 
 article header {
@@ -249,14 +245,13 @@ article p {
   font-size: 1.2em;
   font-weight: 700;
   margin-top: 20px;
-
 }
 
 .article__body {
   font-size: 1.2em;
   line-height: 1.4em;
   margin-bottom: 24px;
-  max-height: 120px;
+  max-height: 150px;
   min-height: 120px;
   width: 100%;
 }
@@ -297,9 +292,10 @@ card p {
   width: 100%;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1040px) {
+  
   body {
-    display: grid;
+    /*display: grid;*/
     grid-template-areas: 
         'nav'
         'section'
@@ -349,11 +345,6 @@ card p {
     padding: 10px 20%;
   }
 
-  section form {
-    max-width: 500px;
-    min-width: 400px;
-  }
-
   main {
     grid-template-columns: 1fr 1fr;
   }
@@ -367,11 +358,11 @@ card p {
   }
 
   article {
-    max-width: 350px;
+    width: 100%;
   }
 }
 
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 675px) {
   body {
     display: grid;
     grid-template-areas: 
@@ -379,7 +370,7 @@ card p {
         'section'
         'main';
     grid-template-columns: 1fr;
-    grid-template-rows: 8vh 50vh auto;
+    grid-template-rows: 8vh 75vh auto;
   }
 
   nav {
@@ -426,11 +417,11 @@ card p {
   main {
     display: grid;
     grid-area: main;
-    grid-gap: 2% 2%;
     grid-template-columns: 1fr;
     padding: 10px 5%;
   }
-  card{
+
+  card {
     width: 100%;
   }
 
@@ -443,6 +434,3 @@ card p {
     width: 100%;
   }
 }
-
-
-
