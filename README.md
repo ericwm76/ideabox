@@ -1,12 +1,14 @@
-*Learning Goals:
+# IdeaBox Redux: This time it's for real
 
-Improve our ability to utilize JavaScript objects.
-Make use of Git work flow.
-Properly utilize event delegation and event handlers.
-Write clean DRY code.
-User input data that persists through browser refreshes and restarts.
+### Learning Goals:
 
-*this.experience:
+1. Improve our ability to utilize JavaScript objects.
+2. Make use of Git work flow.
+3. Properly utilize event delegation and event handlers.
+4. Write clean DRY code.
+5. User input data that persists through browser refreshes and restarts.
+
+### this.experience:
 
 1. Our team collaborated well, getting off to a great start.
 2. We started with a strong HTML foundation and continued building clean modular code.  
@@ -14,6 +16,22 @@ User input data that persists through browser refreshes and restarts.
 4. We had an effective mix of independent, pairing, and whole group work. 
 
 
+## Comp Images
+
+<details><summary>Full Size Comp</summary>
+
+![](https://frontend.turing.io/assets/images/projects/ideabox/ideabox-redux-01.jpg)
+
+</details>
+
+<details><summary>Mobile Comp</summary>
+
+![](https://frontend.turing.io/assets/images/projects/ideabox/ideabox-redux-02.jpg)
+
+</details>
+
+
+## Images of Our Project
 
 <details><summary>Opening Page</summary>
 
