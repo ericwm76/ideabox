@@ -45,7 +45,7 @@
 
 </details>
 
-<details><summary>10 Idead On Load</summary>
+<details><summary>10 Ideas On Load</summary>
 
 ![](https://imgur.com/y9prvFW.png)
 
