@@ -64,9 +64,10 @@ function showTenOnLoad() {
     for (var i = 0; i < 10; i++) {
       recentTenIdeas.unshift(ideasArray[ideasArray.length - 1 -i])
     }; 
+
     clearIdeaBoard();
     recentTenIdeas.forEach(function(idea) {
-    displayIdea(idea);
+      displayIdea(idea);
     });
   };
 };
